@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">    
+    <h:head>
+        <h:outputStylesheet library="css" name="skins.css"/>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
+        <title>TODO supply a title</title>        
+    </h:head>
+    <h:body>   
+        <h:form id="datos"> 
+            <p:panel header="Actualización del perfil de la organización">  
+                <h:outputText id="titulo" escape="false" value="#{paginaTitulo.out}"/>
+                <p:spacer width="10" height="10" />
+                <p:growl id="mensaje" showDetail="true" sticky="false" autoUpdate="true"/>
+                <p:dataTable id="dtEmpleados" widgetVar="wvEmpleados" 
+                             value="#{filtroSolicitud.listaSolicAct}"                        
+                             var="contacto" scrollable="true" scrollHeight="360"
+                             scrollRows="20" liveScroll="true" rowHover="true" 
+                             emptyMessage="No tiene solicitudes de actualizaciones al perfil de su organización."> 
+                    <p:column headerText="Solicitud">
+                        <h:outputText styleClass="fa fa-file"/><p:spacer width="10"/><h:outputText value="#{contacto.noSolicitud}"/>
+                    </p:column>
+                    <p:column headerText="Fecha de solicitud">
+                        <h:outputText styleClass="fa fa-calendar"/><p:spacer width="10"/><h:outputText value="#{contacto.fechaSolic}"><f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText>
+                    </p:column>
+                    <p:column headerText="Estatus de solicitud">
+                        <h:outputText styleClass="fa fa-circle-o"/><p:spacer width="10"/><h:outputText value="#{contacto.estatusActualizado==0 || contacto.estatusActualizado==null?'Sin actualizar':'Actualizado'}"/>
+                    </p:column>
+                    <p:column headerText="Opciones" style="text-align: center;">
+                        <p:commandButton id="revisarSol" title="Revisar solicitud" 
+                                         onclick="PF('bloqueo').show();"
+                                         action="#{filtroSolicitud.irA}" 
+                                         oncomplete="PF('bloqueo').hide();"
+                                         icon="fa fa-check-square-o">
+                            <f:setPropertyActionListener value="#{contacto}" target="#{filtroSolicitud.seleccionado}" />
+                        </p:commandButton>
+                    </p:column>
+                    <f:facet name="footer">
+                        Tratar esta información como confidencial.
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+            <p:confirmDialog header="Confirmación" message="¿Está seguro que desea eliminar el contacto?" showEffect="fade" hideEffect="explode" widgetVar="confirmDialog">
+                <center>
+                    <p:commandButton value="Aceptar" action="#{prospectoContactoFiltro.eliminaContacto}" oncomplete="PF('confirmDialog').hide();" icon="ui-icon-check" update="datos:mensaje datos:dtEmpleados"/>
+                    <p:commandButton value="Cancelar" onclick="PF('confirmDialog').hide();" icon="ui-icon-close"/>
+                </center>
+            </p:confirmDialog> 
+            <p:blockUI block="datos" widgetVar="bloqueo" trigger="datos:dtEmpleados">
+                Procesando información, espere un momento por favor...<br/>
+                <br/> 
+                <p:graphicImage width="45" height="45" value="/Librerias/Imagenes/Base/loading.gif"/> 
+            </p:blockUI>            
+        </h:form>
+    </h:body>
+</html>

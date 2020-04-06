@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="skins.css"/>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
+    </h:head>
+    <h:body>
+        <h:form id="datos" enctype="multipart/form-data">
+            <!--p:toolbar id="tb">
+                <f:facet name="left">
+                    <p:commandButton id="imprimir" icon="ui-icon-print" title="Imprimir" value="Imprimir">
+                        <p:printer target="principal"/>
+                    </p:commandButton>                    
+                </f:facet>
+            </p:toolbar-->
+            <p:spacer width="10" height="10" />
+            <p:panel id="principal" header="Validación de la Cotización">
+                <p:outputPanel id="opGral" style="overflow: auto; height: 397px">
+                    <p:panelGrid style="float: right">
+                        <p:row>
+                            <p:column rowspan="4"><p:spacer width="20" height="10"/></p:column> 
+                            <p:column>CODIGO:</p:column>
+                            <p:column>R4-POP-01</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>REVISIÓN:</p:column>
+                            <p:column>05</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>FECHA REVISIÓN:</p:column>
+                            <p:column>11/DIC/2012</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>TIEMPO DE RETENCIÓN:</p:column>
+                            <p:column>6 AÑOS</p:column>
+                        </p:row>
+                    </p:panelGrid>
+                    <p:spacer width="10" height="150"/>
+                    <p:panelGrid style="width: 100%;">
+                        <p:row>
+                            <p:column colspan="4" style="background: #C2D69B; font-weight: bolder; text-align: center;">
+                                Cotización INICIAL ISO 9001:2015
+                            </p:column>
+                        </p:row>
+                        <p:row style="background: #C2D69B;">
+                            <p:column>
+                                <p:outputLabel value="Cliente:"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{revisarCot.perfilDatos.nombreOrganizacion}"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="C.P.:"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{revisarCot.perfilDatos.cp}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row style="background: #C2D69B;">
+                            <p:column>
+                                <p:outputLabel value="Contacto:"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{revisarCot.perfilDatos.contacto1}"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="Tel.:"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{revisarCot.perfilDatos.telefono}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row style="background: #C2D69B;">
+                            <p:column>
+                                <p:outputLabel value="Domicilio:"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{revisarCot.perfilDatos.calle} #{revisarCot.perfilDatos.numero} #{revisarCot.perfilDatos.colonia}, #{revisarCot.perfilDatos.ciudad}"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="E-mail:"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{revisarCot.perfilDatos.email1}"/>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                    <br/><br/>
+                    <p>
+                        <h:outputText value="Fecha: #{revisarCot.cotizacion.fechaGeneracion}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <br/><br/>
+                        <p:outputLabel value="Estimado(a): #{revisarCot.perfilDatos.contacto1}"/>                    
+                        <br/>
+                    </p>
+                    <br/>
+                    <p style="text-indent:1cm; text-align: justify;">INTERAMERICAS STANDARDS SERVICES, agradece profundamente su interés por darnos la oportunidad de presentar nuestra propuesta integral de servicios de Certificación de acuerdo a los lineamientos establecidos por la norma <b>ISO 9001:2015.</b></p>
+
+                    <p style="text-indent:1cm; text-align: justify;">Ser congruentes es uno de nuestros valores, nuestro objetivo es ser un verdadero Socio de Negocios, en donde la comunicación, transparencia y profesionalismo nos lleve a una relación a largo plazo. Nuestro objetivo es proporcionar servicios de Certificación de Sistemas de Calidad, en donde las evaluaciones sean objetivas, imparciales y eficientes dando como resultado un servicio que realmente genere un valor agregado a la organización. Todo lo antes mencionado no sería posible si no se cuenta con el recurso humano adecuado, evaluadores que cuenten con los códigos industriales y con la experiencia necesaria para poder generar valor en las visitas de evaluación.  En INTERA estamos empeñados en ser reconocidos en la industria como una entidad de alta credibilidad con valores morales firmes y establecidos, comprometiéndose a lograr en cada una de sus operaciones la satisfacción del cliente.
+                    </p>
+                    <p style="text-indent:1cm; text-align: justify;">Es importante seguir los siguientes pasos para proceder con el proceso de certificación: 
+                        --  Firmar y enviar la Validación de la Cotización a nuestras oficinas. (Pagina 3 de este documento).
+                        --  Indicar si requiere una Pre-evaluación, así como las fechas sugeridas.
+                        --  Indicar las fechas tentativas de evaluación para la visita inicial.</p>
+
+                    <p style="text-indent:1cm; text-align: justify;">Una vez enviada esta información, en un plazo no mayor a dos semanas, su evaluador Líder se pondrá en contacto con usted para confirmar las fechas de revisión de manual y de auditoria. Tratamos de que este proceso sea ágil y rápido de tal manera que los canales de comunicación entre el evaluador líder y la organización sean establecidos lo antes posible para responder a cualquier duda o pregunta técnica.
+                    </p>
+                    <p style="text-indent:1cm; text-align: justify;">Cualquier duda o pregunta sobre el proceso de certificación o inquietudes de carácter técnico quedo a sus órdenes por medio de: Tel: 993-2424 o por correo electrónico en: <b>luis.romero@interamericas.com.mx</b>
+                    </p>
+                    <p style="text-align: justify; font-weight: bold">Atentamente</p>
+                    <br/>
+                    <p style="text-align: justify;">Inter Americas Standards Services</p>
+                    <br/>
+                    <p style="text-align: justify; font-weight: bold">
+                        Esta cotización <font color="red" style="font-style: italic; text-decoration: underline;text-decoration-color: red;">INCLUYE TODOS LOS VIATICOS, NO INCLUYE IVA</font> con ello pretendemos eliminar cualquier tipo de incertidumbre, costos ocultos o sorpresas para nuestros clientes.  Todos los viáticos están considerados tales como hospedajes, alimentos, transportación, etc.
+                    </p>
+                    <br/> 
+                    <p style="text-align: justify; font-weight: bold"><font size="large">Justificación (Para uso de INTERA exclusivamente)</font>
+                        <br/><br/>
+                        Nota 1: Esta cotización está basada y amparada bajo la Norma ISO/IEC 17021 vigente, emitida por Internacional Acreditación Fórum así
+                        como documento mandatorio MD5:2013<br/><br/>
+                        Nota 2: En los casos de aplicación de esquemas multisitio, esta se hará en apego al documento MD1:2007
+                    </p>
+                    <br/><br/>
+                    <p:panel id="infoCot" header="Información de Costos">
+                        <p:panelGrid id="pnlAct" style="margin-top:20px; width: 100%" binding="#{revisarCot.tablaAct}">
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column colspan="3">Costo del Registro</p:column>
+                                </p:row>
+                            </f:facet>
+                        </p:panelGrid>
+                        <br/>
+                        <p:panelGrid id="pnlG" style="margin-top:20px; width: 100%" binding="#{revisarCot.tablaMnto}">
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column colspan="#{revisarCot.estructura.totalCols}">
+                                        Costo del Registro de Mantenimiento
+                                    </p:column>
+                                </p:row>
+                            </f:facet>
+                        </p:panelGrid>
+                        <br/>
+                    </p:panel>
+                    <br/><br/>
+                    <p><p:panel header="Validación de la Cotización">
+                            <p:panelGrid style="width: 90%">
+                                <p:row>
+                                    <p:column colspan="4">
+                                        <p:outputLabel style="font-weight: bold" value="Favor de indicar datos de facturación:"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2">
+                                        <p:outputLabel value="Razón Social:"/>
+                                    </p:column>
+                                    <p:column colspan="2">
+                                        <p:inputText id="razonS" value="#{revisarCot.factura.razonSocial}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2">
+                                        <p:outputLabel value="RFC:"/>
+                                    </p:column>
+                                    <p:column colspan="2">
+                                        <p:inputText id="rfc" value="#{revisarCot.factura.rfc}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2">
+                                        <p:outputLabel value="Domicilio:"/>
+                                    </p:column>
+                                    <p:column colspan="2">
+                                        <p:inputText id="dom" value="#{revisarCot.factura.domicilio}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="4">
+                                        <p:outputLabel value="Alcance del Registro:"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="4">
+                                        <p:inputTextarea id="alcance" style="width: 95%" value="#{revisarCot.cotizaVal.alcanceRegistro}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="4">
+                                        <p:outputLabel style="font-weight: bold" value="Favor de indicar en los recuadros las fechas tentativas que usted sugiere para llevar a cabo
+                                                       dichas actividades:"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="#{revisarCot.cotizacion.idTipoCotizacion!=1 ? '2' : '0'}"><p:outputLabel value="Sitio y Nombre"/></p:column>
+                                    <p:column rendered="#{revisarCot.cotizacion.idTipoCotizacion==1}"><p:outputLabel value="Pre-evaluación (Opcional)"/></p:column>
+                                    <p:column rendered="#{revisarCot.cotizacion.idTipoCotizacion==1}"><p:outputLabel value="Auditoria Inicial FASE 1"/></p:column>
+                                    <p:column rendered="#{revisarCot.cotizacion.idTipoCotizacion==1}"><p:outputLabel value="Auditoria Inicial FASE 2"/></p:column>
+                                    <p:column colspan="2" rendered="#{revisarCot.cotizacion.idTipoCotizacion!=1}"><p:outputLabel value="#{revisarCot.actividad.descripcion}"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="#{revisarCot.cotizacion.idTipoCotizacion!=1 ? '2' : '0'}"><p:inputTextarea id="sitioNom" value="#{revisarCot.cotizaVal.sitioNombre}"/></p:column>
+                                    <p:column rendered="#{revisarCot.cotizacion.idTipoCotizacion==1}"><p:calendar id="act2" value="#{revisarCot.cotizaVal.preEvaluacion}" showOn="button"/></p:column>
+                                    <p:column rendered="#{revisarCot.cotizacion.idTipoCotizacion==1}"><p:calendar id="act3" value="#{revisarCot.cotizaVal.fase1}" showOn="button"/></p:column>
+                                    <p:column rendered="#{revisarCot.cotizacion.idTipoCotizacion==1}"><p:calendar id="act4" value="#{revisarCot.cotizaVal.fase2}" showOn="button"/></p:column>
+                                    <p:column colspan="2" rendered="#{revisarCot.cotizacion.idTipoCotizacion!=1}"><p:calendar id="act5" value="#{revisarCot.cotizaVal.segRecertVisita}" showOn="button"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="4">
+                                        <p:outputLabel value="Estas fechas no son una obligación formal y pueden cambiarse de conformidad con los
+                                                       términos y condiciones del convenio de registro. Su programa formal lo acordará con su Auditor Líder."/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="4" style="text-align: left">
+                                        <p:outputLabel style="font-weight: bold" value="DECLARACION:"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column style="text-align: right"><p:selectBooleanCheckbox value="#{revisarCot.cotizaVal.declaraLee}" /></p:column>
+                                    <p:column colspan="3">Leímos, comprendimos y estamos de acuerdo con las notas explicatorias de la cotización.</p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column style="text-align: right"><p:selectBooleanCheckbox value="#{revisarCot.cotizaVal.declaraConfirma}" /></p:column>
+                                    <p:column colspan="3">Confirmamos que hemos dirigido una revisión por la Dirección del sistema y un ciclo de auditoria interna para la preparación de nuestra evaluación inicial. 
+                                        En la siguiente fecha:
+                                        <br/>
+                                        <p:calendar id="confirmaFecha" value="#{revisarCot.cotizaVal.declaraFecha}" showOn="button"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </p:panel>
+                    </p>
+                    <p style="font-weight: bold; text-decoration-line: underline">
+                        Nota 1.- La cotización mencionada está basada en la información proporcionada por el cliente y es válida por 60 días a partir de la fecha de esta carta. 
+                        <br/><br/>
+                        Nota 2.- Los montos mencionados en la cotización podrían variar dependiendo de las condiciones existentes antes de llevar cada proceso de auditoria, como por ejemplo: un aumento significativo de personal, nuevos procesos o productos/servicios no incluidos dentro del alcance original, incrementos o disminuciones en un esquema de certificación multisitios, etc.
+                    </p>
+                </p:outputPanel>
+            </p:panel>
+            <br/>
+            <p:separator/>
+            <br/>
+            <p:commandButton id="guardar" icon="ui-icon-disk" title="Guardar"
+                             value="Guardar" ajax="false" action="#{revisarCot.guardar}" 
+                             onclick="PF('bloqueo').show();" oncomplete="PF('bloqueo').hide();"/>
+            <p:commandButton id="regresar" icon="ui-icon-arrowreturnthick-1-w" action="#{revisarCot.regresar}"
+                             value="Regresar" ajax="true" title="Regresar"/>
+            <p:commandButton id="notas" icon="ui-icon-document" action="#{revisarCot.verNotas}"
+                             value="Ver Notas Explicatorias" ajax="true" title="Notas explicatorias"/>
+            <p:blockUI block="datos" widgetVar="bloqueo">
+                Procesando información, espere un momento por favor...<br/>
+                <br/> 
+                <p:graphicImage width="45" height="45" value="/Librerias/Imagenes/Base/loading.gif"/> 
+            </p:blockUI>
+            <!--p:sticky target="tb" /-->
+        </h:form>
+    </h:body>
+</html>

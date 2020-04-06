@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">      
+  <h:head>  
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  
+    <link href="#{facesContext.externalContext.requestContextPath}/Librerias/Estilos/skins.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript">
+      
+    </script>
+
+  </h:head>
+  <h:body> 
+    <table align="center" cellpadding="30%">
+      <tr>
+        <td>
+          <p:panel style="alignment-baseline: central" header="Favor de cerrar sesión y volver a autentificarse">
+              <table align="center">
+                  <tr>
+                      <td align="center">
+            <p:button href="../..#{facesContext.externalContext.requestContextPath}/faces/index.xhtml" target="_top" value="Cerrar sesión">
+              <p:ajax event="click" listener="#{accesoLogin.logout}"></p:ajax>
+            </p:button>                                                          
+                      </td>
+                  </tr>
+              </table>
+          </p:panel>
+        </td>
+      </tr>
+    </table>
+  </h:body>
+
+</html>

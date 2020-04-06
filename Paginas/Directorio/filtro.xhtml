@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">    
+    <h:head>
+        <h:outputStylesheet library="css" name="skins.css"/>
+    </h:head>
+    <h:body>   
+        <h:form id="datos">
+            <p:growl id="mensaje"  for="mensaje" showDetail="true" autoUpdate="true"/>
+            <p:dataTable id="dtTrUsuario" value="#{directorioFiltro.listaUsuarioDto}" var="usuario" paginator="true" paginatorAlwaysVisible="false" rows="10" >
+                <f:facet name="header">
+                    <p:spacer width="10" height="20" />
+                    <p:commandButton icon="ui-icon-plusthick" action="#{directorioFiltro.agregarUsuario}" title="Registrar usuario" style="float: right"
+                                     onclick="PF('uiBloqueo').show();" oncomplete="PF('uiBloqueo').hide();" >
+                        <p:ajax event="dialogReturn" listener="#{directorioFiltro.dialogReturn}" update="dtTrUsuario" />
+                    </p:commandButton>
+                </f:facet>
+                <p:column headerText="Clave de usuario">
+                    <h:outputText value="#{usuario.idUsuario}"/>
+                </p:column>
+                <p:column headerText="Nombre de usuario">
+                    <h:outputText value="#{usuario.login}"/>
+                </p:column>
+                <p:column headerText="Contraseña">
+                    <h:outputText value="#{usuario.pass}"/>
+                </p:column>                
+                <p:column headerText="Opciones" styleClass="colOpciones">
+                    <p:commandButton icon="ui-icon-pencil" action="#{directorioFiltro.modificarUsuario}" title="Modificar usuario" onclick="PF('uiBloqueo').show();" oncomplete="PF('uiBloqueo').hide();" >
+                        <p:ajax event="dialogReturn" listener="#{directorioFiltro.dialogReturn}" update="dtTrUsuario" />
+                        <f:setPropertyActionListener  value="#{usuario}" target="#{directorioFiltro.registro}"/> 
+                    </p:commandButton>                
+                    <p:commandButton icon="ui-icon-closethick" action="#{directorioFiltro.abrirVentana}" title="Eliminar usuario" onclick="PF('ventana').show();">                        
+                        <f:setPropertyActionListener  value="#{usuario}" target="#{directorioFiltro.registro}"/> 
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            <p:confirmDialog  message="¿Está seguro que desea eliminar el registro?" showEffect="fade" hideEffect="explode" widgetVar="ventana">
+                <center>
+                    <p:commandButton value="Aceptar" action="#{directorioFiltro.eliminar}" oncomplete="PF('ventana').hide();" icon="ui-icon-check" update="dtTrUsuario"/>
+                    <p:commandButton value="Cancelar" onclick="PF('ventana').hide();" icon="ui-icon-close"/>
+                </center>
+            </p:confirmDialog>
+            <p:separator/> 
+            <p:spacer width="10" height="10" />
+            
+            <p:blockUI block="datos"  widgetVar="uiBloqueo">
+                Cargando información, espere un momento por favor...<br/>
+                <br/> 
+                <p:graphicImage width="45" height="45" value="/Librerias/Imagenes/loading.gif"/>  
+            </p:blockUI>
+        </h:form>        
+    </h:body>
+</html>

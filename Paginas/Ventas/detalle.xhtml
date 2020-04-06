@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">  
+    <h:head>
+        <h:outputStylesheet library="css" name="skins.css"/>
+    </h:head>
+    <h:body>   
+        <h:form id="datos">
+            <c:set property="out" target="#{paginaTitulo}" value="#{prospectoContactoDetalle.titulo}"/>
+            <h:outputText id="titulo" escape="false" value="#{paginaTitulo.out}"/>
+            <p:spacer width="10" height="10" />
+            <p:growl id="mensaje" showDetail="true" sticky="false" autoUpdate="true"/>
+            <p:spacer width="20" height="20" />
+            <h:panelGrid  columns="2" style="text-align: left; margin: 0 auto;" cellpadding="5">
+                <p:outputLabel value="Nombre de la Organización:"/>
+                <p:inputText id="nombreOrg" value="#{prospectoContactoDetalle.registro.nombreOrganizacion}" style="width: 300px; text-transform: uppercase"/>                
+                <p:outputLabel value="Calle:"/>
+                <p:inputText id="calle" value="#{prospectoContactoDetalle.registro.calle}" style="width: 300px; text-transform: uppercase"/>
+                <p:outputLabel value="Número:"/>
+                <p:inputText id="numero" value="#{prospectoContactoDetalle.registro.numero}" style="width: 300px; text-transform: uppercase"/>
+                <p:outputLabel value="Colonia:"/>
+                <p:inputText id="colonia" value="#{prospectoContactoDetalle.registro.colonia}" style="width: 300px; text-transform: uppercase"/>                
+                <p:outputLabel value="Ciudad:"/>
+                <p:inputText id="ciudad" value="#{prospectoContactoDetalle.registro.ciudad}" style="width: 300px; text-transform: uppercase"/>
+                <p:outputLabel value="Estado:"/>
+                <p:inputText id="estado" value="#{prospectoContactoDetalle.registro.estado}" style="width: 300px; text-transform: uppercase"/>
+                <p:outputLabel value="País:"/>
+                <p:inputText id="pais" value="#{prospectoContactoDetalle.registro.pais}" style="width: 300px; text-transform: uppercase"/>
+                <p:outputLabel value="Código postal:"/>
+                <p:inputText id="cp" value="#{prospectoContactoDetalle.registro.cp}" style="width: 300px; text-transform: uppercase"/>
+                <p:outputLabel value="Teléfono:"/>
+                <p:inputText id="tel" value="#{prospectoContactoDetalle.registro.telefono}" style="width: 300px; text-transform: uppercase"/>
+                <p:outputLabel value="Fax:"/>
+                <p:inputText id="fax" value="#{prospectoContactoDetalle.registro.fax}" style="width: 300px; text-transform: uppercase"/>
+                <p:outputLabel value="Contacto:"/>
+                <p:inputText id="contacto" value="#{prospectoContactoDetalle.registro.contacto1}" style="width: 300px; text-transform: uppercase"/>
+                <p:outputLabel value="Email:"/>
+                <p:inputText id="email" value="#{prospectoContactoDetalle.registro.email1}" style="width: 300px; text-transform: uppercase"/>
+                <p:outputLabel value="Cargo/Área:"/>
+                <p:inputText id="cargo" value="#{prospectoContactoDetalle.registro.cargo1}" style="width: 300px; text-transform: uppercase"/>
+                <p:outputLabel value="Contacto Adicional:"/>
+                <p:inputText id="contactoA" value="#{prospectoContactoDetalle.registro.contacto2}" style="width: 300px; text-transform: uppercase"/>
+                <p:outputLabel value="Email Adicional:"/>
+                <p:inputText id="emailA" value="#{prospectoContactoDetalle.registro.email2}" style="width: 300px; text-transform: uppercase"/>
+                <p:outputLabel value="Cargo/Área:"/>
+                <p:inputText id="cargoA" value="#{prospectoContactoDetalle.registro.cargo2}" style="width: 300px; text-transform: uppercase"/>
+            </h:panelGrid>
+            <p:spacer width="10" height="10"/>
+            <p:separator/>
+            <p:spacer width="10" height="10"/>
+            <h:panelGrid columns="3" style="text-align: center; margin: 0 auto">
+                <p:commandButton value="Agregar" actionListener="#{prospectoContactoDetalle.aceptar}" rendered="#{!prospectoContactoDetalle.modificar}"/>
+                <p:commandButton value="Modificar" actionListener="#{prospectoContactoDetalle.aceptar}" rendered="#{prospectoContactoDetalle.modificar}"/>
+                <p:commandButton value="Regresar" actionListener="#{prospectoContactoDetalle.cancelar}"/> 
+            </h:panelGrid>
+            <p:blockUI block="datos" widgetVar="bloqueo">
+                Cargando información, espere un momento por favor...<br/>
+                <br/> 
+                <p:graphicImage width="45" height="45" value="/Librerias/Imagenes/Base/loading.gif"/> 
+            </p:blockUI>
+        </h:form>        
+    </h:body>
+</html>

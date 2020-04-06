@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">      
+    <h:head>  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script language="JavaScript" type="text/javascript">
+            function fecha() {
+                meses = new Array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
+                today = new Date();
+                dia = today.getDate();
+                mes = today.getMonth();
+                anio = today.getFullYear();
+                h = today.getHours();
+                m = today.getMinutes();
+                s = today.getSeconds();
+                m = tiempo(m);
+                s = tiempo(s);
+                if (h >= 12) {
+                    AmPm = " p.m.";
+                } else {
+                    AmPm = " a.m.";
+                }
+                if (h > 12) {
+                    h -= 12;
+                }
+                if (h == 0) {
+                    h = 12;
+                }
+                texto = "Hoy es " + dia + " de " + meses[mes] + " del " + anio + " ";
+                if (m == "00") {
+                    texto += "&#60;font color=00FF00>";
+                }
+                else {
+                    texto += "&#60;font color=YELLOW>";
+                }
+                texto += h + ":" + m + ":" + s + " " + AmPm;
+                texto += '&#60;' + '/font>';
+                document.getElementById('reloj').innerHTML = texto;
+                setTimeout('fecha()', 500);
+            }
+            function tiempo(i) {
+                if (i == 9 || i == 8 || i == 7 || i == 6 || i == 5 || i == 4 || i == 3 || i == 2 || i == 1 || i == 0) {
+                    i = "0" + i;
+                }
+                return i;
+            }
+
+            window.onload = function() {
+                fecha();
+            }
+        </script>
+        <style type="text/css">
+            <!--
+            table {
+                font-weight: bold;
+                color: #FFFFFF;
+            }
+            -->
+        </style>
+    </h:head>
+    <h:body>       
+        <table width="100%" style="position:absolute; height:100%; z-index:1; left: 0px; top: 0px;font-weight: bold;color: #FFFFFF;" class="ui-state-default"> 
+            <tr>
+                <td width="50%">
+                    <p:spacer width="15" height="1"/>
+                    <p:outputLabel escape="false" value="#{contenedorEncabezado.bienvenida} #{contenedorEncabezado.usuario}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#{contenedorEncabezado.autentifica.empleado.idPerfil != 6 ? '( '.concat(contenedorEncabezado.perfil).concat(' )') : ''}" />
+                </td>
+                <td width="20%">
+                    <span id="reloj" style="position:relative"></span>
+                </td>
+                <td width="30%" align="center">
+                    
+                    <!--p:button href="../../index.xhtml" target="_top" value="Cerrar sesión">
+                        <p:ajax event="click" listener="{accesoLogin.logout}"></p:ajax>
+                    </p:button-->
+                </td>
+            </tr>
+        </table>
+        <!--div id="header" class="ui-state-default" style=" ">
+            <h1><img src="../../Librerias/Imagenes/logo_enoe.png" height="60" /></h1>
+            <h2><img src="../../Librerias/Imagenes/titulo.png" height="80" alt="encuesta_" /></h2>
+            <h3><img src="../../Librerias/Imagenes/Logo-INEGI_ok.png" height="88" alt="logo" /></h3>
+        </div-->
+    </h:body>
+</html>

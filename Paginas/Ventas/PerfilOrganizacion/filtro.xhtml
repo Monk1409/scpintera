@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">    
+    <h:head>
+        <h:outputStylesheet library="css" name="skins.css"/>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
+        <title>TODO supply a title</title>        
+    </h:head>
+    <h:body>   
+        <h:form id="datos">            
+            <h:outputText id="titulo" escape="false" value="#{paginaTitulo.out}"/>
+            <p:spacer width="10" height="10" />
+            <p:growl id="mensaje" showDetail="true" sticky="false" autoUpdate="true"/>
+            <p:dataTable id="dtEmpleados" widgetVar="wvEmpleados" 
+                         value="#{filtroRevision.listaPerfilDatosGral}"
+                         filteredValue="#{filtroRevision.filtroPerfil}"                         
+                         var="contacto" scrollable="true" scrollHeight="360"
+                         scrollRows="20" liveScroll="true" rowHover="true" 
+                         emptyMessage="No se encontraron registros con la búsqueda realizada.">
+                <f:facet name="header">
+                    <p:spacer width="50" height="30"/> 
+                    <p:outputPanel style="float: right;">
+                        <h:outputText value="Búsqueda general:" />
+                        <p:spacer width="10"/> 
+                        <p:inputText id="globalFilter" onkeyup="PF('wvEmpleados').filter();" style="width:150px" placeholder="Ingresa palabra clave"/>
+                    </p:outputPanel>
+                </f:facet>
+                <p:column style="width:16px">
+                    <p:rowToggler />
+                </p:column>
+                <p:column headerText="Empresa" filterBy="#{contacto.nombreOrganizacion}" filterMatchMode="contains">
+                    <h:outputText styleClass="fa fa-suitcase"/><p:spacer width="10"/><h:outputText value="#{contacto.nombreOrganizacion}"/>
+                </p:column>
+                <p:column headerText="Ciudad" filterBy="#{contacto.ciudad}" filterMatchMode="contains">
+                    <h:outputText styleClass="fa fa-circle-o"/><p:spacer width="10"/><h:outputText value="#{contacto.ciudad}"/>
+                </p:column>
+                <p:column headerText="Nombre de contacto" filterBy="#{contacto.contacto1}" filterMatchMode="contains">
+                    <h:outputText styleClass="fa fa-user"/><p:spacer width="10"/><h:outputText value="#{contacto.contacto1}"/>
+                </p:column>   
+                <p:column headerText="Email" filterBy="#{contacto.email1}" filterMatchMode="contains">
+                    <h:outputText styleClass="fa fa-envelope-o"/><p:spacer width="8"/><h:outputText value="#{contacto.email1}"/><br/>
+                </p:column>
+                <p:column headerText="Teléfono" filterBy="#{contacto.telefono}" filterMatchMode="contains">
+                    <h:outputText styleClass="fa fa-phone"/><p:spacer width="10"/><h:outputText value="TEL. #{contacto.telefono}"/>
+                </p:column>
+                <p:column headerText="Opciones" style="text-align: center;">
+                    <p:commandButton id="revisarSol" title="Revisar solicitud" 
+                                     onclick="PF('bloqueo').show();"
+                                     action="#{filtroRevision.irA}" 
+                                     oncomplete="PF('bloqueo').hide();"
+                                     icon="fa fa-check-square-o">
+                        <f:setPropertyActionListener value="#{contacto}" target="#{filtroRevision.seleccionado}" />
+                    </p:commandButton>
+                    <p:spacer width="10"/>
+                    <p:commandButton id="enviarCorreoActPer" title="Enviar correo para actualizar perfil" 
+                                     onclick="PF('bloqueo').show();"
+                                     action="#{filtroRevision.generaCorreoActPer}" 
+                                     oncomplete="PF('bloqueo').hide();"
+                                     icon="fa fa-envelope" update="datos:dtEmpleados">
+                        <f:setPropertyActionListener value="#{contacto}" target="#{filtroRevision.seleccionado}" />
+                    </p:commandButton>
+                </p:column>
+                <p:rowExpansion>
+                    <p:dataTable id="dtActs" widgetVar="wvActs" 
+                                 value="#{contacto.listaAct}"                         
+                                 var="actualiza" 
+                                 emptyMessage="No se han realizado actualizaciones al perfil.">
+                        <p:column headerText="Empresa">
+                            <h:outputText value="#{actualiza.nombreOrganizacion}"/>
+                        </p:column>
+                        <p:column headerText="Nombre Comercial">
+                            <h:outputText value="#{actualiza.nombreComercial}"/>
+                        </p:column>
+                        <p:column headerText="Ciudad">
+                            <h:outputText value="#{actualiza.ciudad}"/>
+                        </p:column>
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{actualiza.estado}"/>
+                        </p:column>
+                        <p:column headerText="Estatus">
+                            <h:outputText value="#{actualiza.estatusActualizado==0 || actualiza.estatusActualizado==null?'Sin actualizar':'Actualizado'}"/>
+                        </p:column>
+                        <p:column headerText="Opciones" style="text-align: center;">
+                            <p:commandButton id="revisarSolAct" title="Revisar solicitud de actualización" 
+                                             onclick="PF('bloqueo').show();"
+                                             action="#{filtroRevision.irActualizacion}" 
+                                             oncomplete="PF('bloqueo').hide();"
+                                             icon="fa fa-check-square-o">
+                                <f:setPropertyActionListener value="#{actualiza}" target="#{filtroRevision.seleccionadoAct}" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </p:rowExpansion>
+                <f:facet name="footer">
+                    Tratar esta información como confidencial.
+                </f:facet>
+            </p:dataTable>
+            <p:confirmDialog header="Confirmación" message="¿Está seguro que desea eliminar el contacto?" showEffect="fade" hideEffect="explode" widgetVar="confirmDialog">
+                <center>
+                    <p:commandButton value="Aceptar" action="#{prospectoContactoFiltro.eliminaContacto}" oncomplete="PF('confirmDialog').hide();" icon="ui-icon-check" update="datos:mensaje datos:dtEmpleados"/>
+                    <p:commandButton value="Cancelar" onclick="PF('confirmDialog').hide();" icon="ui-icon-close"/>
+                </center>
+            </p:confirmDialog> 
+            <p:blockUI block="datos" widgetVar="bloqueo" trigger="datos:dtEmpleados">
+                Procesando información, espere un momento por favor...<br/>
+                <br/> 
+                <p:graphicImage width="45" height="45" value="/Librerias/Imagenes/Base/loading.gif"/> 
+            </p:blockUI>
+        </h:form>
+    </h:body>
+</html>

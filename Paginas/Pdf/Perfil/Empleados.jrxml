@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<parameter name="ID_PERFIL_DATOS_GENERALES" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT
+     id_perfil_empleados,
+     total_personal_org,
+     total_alcance_sis,
+     total_domicilio,
+     total_produccion,
+     total_administrativos,
+     total_disenio,
+     total_calidad,
+     matriz_turnos,
+     sitios_remotos
+FROM
+     tr_perfil_empleados
+WHERE id_perfil_datos_generales = $P{ID_PERFIL_DATOS_GENERALES}]]>
+	</queryString>
+	<field name="id_perfil_empleados" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_personal_org" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_alcance_sis" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_domicilio" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_produccion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_administrativos" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_disenio" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_calidad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="matriz_turnos" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sitios_remotos" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<detail>
+		<band height="792" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="555" height="24"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="2" y="3" width="551" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empleados]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="24" width="276" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="25" width="270" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de personal en la organización:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="40" width="270" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{total_personal_org}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="24" width="279" height="40" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="26" width="268" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total incluido en el alcance del sistema:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="41" width="268" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{total_alcance_sis}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="63" width="276" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="64" width="270" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total en este domicilio:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="79" width="270" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{total_domicilio}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="63" width="279" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="65" width="268" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total en producción/servicio (en este domicilio)]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="80" width="268" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{total_produccion}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="103" width="276" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="104" width="270" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Administrativos (en este domicilio)]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="119" width="270" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{total_administrativos}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="103" width="279" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="105" width="268" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total en Diseño (si aplica) (en este domicilio)]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="120" width="268" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{total_disenio}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="143" width="276" height="116"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="144" width="270" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Calidad (en este domicilio)]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="159" width="270" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{total_calidad}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="143" width="279" height="116"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="145" width="268" height="90"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indique el sistema de turnos con los que opera la organización, incluyendo los sitios remotos (cuando aplique).
+
+Matriz: Matutino          Vespertino            Nocturno
+
+Sitios Remotos: Favor de Especificar (Si aplica)
+]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="234" width="268" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sitios_remotos}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="365" y="193" width="16" height="14"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="364" y="193" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{matriz_turnos}.intValue() == 1 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="445" y="193" width="16" height="14"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="444" y="193" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{matriz_turnos}.intValue() == 2 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="522" y="193" width="16" height="14"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="521" y="193" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{matriz_turnos}.intValue() == 3 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="259" width="555" height="24"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="2" y="261" width="551" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Requerimientos de Certificación]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="282" width="276" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="283" width="270" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuenta con manual de procedimientos:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="298" width="270" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="282" width="279" height="40" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="284" width="268" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indique el estándar que busca certificar:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="299" width="268" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="321" width="276" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="322" width="270" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Ha dirigido al menos una revisión por la Dirección?]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="337" width="270" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="321" width="279" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="323" width="268" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Ha realizado al menos un ciclo de auditoría?]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="338" width="268" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="361" width="276" height="98"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="362" width="270" height="28"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Su organización está optando por alguna exclusión permisible? ¿Qué cláusulas está excluyendo?]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="389" width="270" height="66" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="361" width="279" height="98"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="363" width="268" height="27"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indique otras certificaciones, registros o asociaciones comerciales a las que pertenezca y que estén vigentes:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="389" width="268" height="66" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="459" width="276" height="58"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="459" width="270" height="33"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Está utilizando los servicios de algún consultor?]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="491" width="270" height="23" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="459" width="279" height="58"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="459" width="268" height="33"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En caso de que si esté utilizando los servicios de un consultor, mencione cuál es:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="491" width="268" height="23" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="517" width="555" height="40"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="6" y="533" width="545" height="24" forecolor="#000000"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="518" width="545" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Favor de indicar cuándo tienen considerado llevar a cabo su certificación:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="554" width="555" height="24"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="2" y="556" width="551" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Requerimientos para Transferencia (si aplica)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="577" width="276" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="578" width="270" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Casa certificadora actual:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="593" width="270" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="577" width="279" height="40" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="579" width="268" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Emisión y Expiración del Certificado actual:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="594" width="268" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="616" width="276" height="50"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="617" width="270" height="47"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Favor de Indicar su próximo evento de Certificación:
+
+Recertificación                     Mantenimiento       
+]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="276" y="616" width="279" height="50"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="618" width="268" height="31"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Tiene cerradas las no conformidades relativas a su última auditoría externa? (en caso de existir)]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="649" width="268" height="14" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="666" width="276" height="58"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="667" width="270" height="55"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Favor de Indicar cuál es su esquema de Certificación: 
+
+Semestral                          Anual]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="276" y="666" width="279" height="58"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="668" width="268" height="30"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Tiene el último reporte  de Auditoría practicada por la casa Certificadora Actual?]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="698" width="268" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="724" width="276" height="66"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="725" width="270" height="41"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Favor de indicar en qué ciclo de certificación se encuentra (Ejemplo: 1er seguimiento semestral o bien segundo seguimiento anual): 
+]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="766" width="270" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="724" width="279" height="66"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="726" width="268" height="40"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Favor de indicar el número de días de auditoría y número de auditores aplicados en los eventos de auditoría con su organismo actual: ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="283" y="766" width="268" height="24" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="90" y="635" width="16" height="14"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="89" y="635" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="220" y="635" width="16" height="14"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="219" y="635" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="75" y="698" width="16" height="14"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="74" y="698" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+			</textField>
+			<rectangle>
+				<reportElement x="175" y="698" width="16" height="14"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="174" y="698" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

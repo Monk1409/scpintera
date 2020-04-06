@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">    
+    <h:head>
+        <link href="#{facesContext.externalContext.requestContextPath}/Librerias/Estilos/skins.css" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript">
+            //<![CDATA[             
+            function disableAllTheseDays(date) {
+                var fechas = document.getElementById("datos:fechasApartadas").value;
+                var disabledDays = fechas.toString().split(",");
+                var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+                for (i = 0; i < disabledDays.length; i++) {
+                    if ($.inArray((m + 1) + '-' + d + '-' + y, disabledDays) !== -1) {
+                        return [false];
+                    }
+                }
+                return [true];
+            }
+            
+            function validaFecha(calendario) {
+               if(calendario)
+                   return true;
+               
+               return false;
+            }
+            // ]]>
+        </script>
+    </h:head>
+    <h:body>   
+        <h:form id="datos">            
+            <p:growl id="mensaje" showDetail="true"/>
+            <h:inputHidden id="fechasApartadas" value="9-16-2016,8-30-2016,10-15-2016,10-22-2016,11-5-2016" />
+            <h:panelGrid columnClasses="value">
+                <p:schedule id="schedule" value="#{reservaAgenda.eventModel}" displayEventEnd="true" widgetVar="myschedule" timeZone="GMT-6" locale="es">
+                    <p:ajax event="dateSelect" onstart="return validaFecha(this);" listener="#{reservaAgenda.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                    <p:ajax event="eventSelect" listener="#{reservaAgenda.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                    <p:ajax event="eventMove" listener="#{reservaAgenda.onEventMove}" update="mensaje" />
+                    <p:ajax event="eventResize" listener="#{reservaAgenda.onEventResize}" update="mensaje" />
+                </p:schedule>
+            </h:panelGrid>
+            <p:dialog widgetVar="eventDialog" header="Detalles del evento" showEffect="clip" hideEffect="clip">
+                <h:panelGrid id="eventDetails" columns="2">
+                    <p:outputLabel for="title" value="Usuario:" />
+                    <p:inputText id="title" value="#{reservaAgenda.event.title}" required="true" />
+
+                    <p:outputLabel for="from" value="Desde:" />
+                    <p:calendar id="from" value="#{reservaAgenda.event.startDate}" beforeShowDay="disableAllTheseDays" timeZone="GMT-6" pattern="dd/MM/yyyy HH:mm">
+                        <f:converter converterId="timestampConverter"/>
+                    </p:calendar>
+
+                    <p:outputLabel for="to" value="Hasta:" />
+                    <p:calendar id="to" value="#{reservaAgenda.event.endDate}" beforeShowDay="disableAllTheseDays" timeZone="GMT-6" pattern="dd/MM/yyyy HH:mm">
+                        <f:converter converterId="timestampConverter"/>
+                    </p:calendar>
+
+                    <p:commandButton type="reset" value="Reset" />
+                    <p:commandButton id="addButton" value="Save" process="eventDetails" actionListener="#{reservaAgenda.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+                </h:panelGrid>
+            </p:dialog>    
+        </h:form>
+        <script type="text/javascript">
+            PrimeFaces.locales['es'] = {
+                closeText: "Cerrar",
+                prevText: "Anterior",
+                nextText: "Siguiente",
+                monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+                dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+                dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+                weekHeader: "Semana",
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: "",
+                timeOnlyTitle: "Solo hora",
+                timeText: "Tiempo",
+                hourText: "Hora",
+                minuteText: "Minuto",
+                secondText: "Segundo",
+                currentText: "Fecha actual",
+                ampm: false,
+                month: "Mes",
+                week: "Semana",
+                day: "Día",
+                allDayText: "Todo el día"
+            };
+        </script>
+        <style type="text/css">
+            .value {
+                width: 1000px;
+            }
+        </style>
+    </h:body>
+</html>

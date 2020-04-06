@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<parameter name="ID_PERFIL_DATOS_GENERALES" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT
+    id_perfil_multisitios,
+     id_mapa_procesos,
+     proceso_igual,
+     proceso_complementario,
+     proceso_complementario_SR,
+     proceso_independiente,
+     auditoria_SR,
+     queja_SR,
+     inclusion_SR_alcance
+FROM
+     tr_perfil_multisitios
+WHERE id_perfil_datos_generales = $P{ID_PERFIL_DATOS_GENERALES}]]>
+	</queryString>
+	<field name="id_perfil_multisitios" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_mapa_procesos" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="proceso_igual" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="proceso_complementario" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="proceso_complementario_SR" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="proceso_independiente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="auditoria_SR" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="queja_SR" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="inclusion_SR_alcance" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="214" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="555" height="24"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="2" y="3" width="551" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Requerimientos para Multisitios (si aplica)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="24" width="276" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="25" width="270" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adjunte mapa de procesos de cada Sitio Remoto.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="276" y="24" width="279" height="40" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="26" width="268" height="37"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tiene los mismos procesos en matriz y Sitios Remotos?
+
+                                 si                       no]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="400" y="45" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="399" y="45" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proceso_igual}.intValue() == 1 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="482" y="45" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="481" y="45" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proceso_igual}.intValue() == 0 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="63" width="276" height="50"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="276" y="63" width="279" height="50"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="276" y="113" width="279" height="50"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="163" width="276" height="50"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="276" y="163" width="279" height="50"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="113" width="276" height="50"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="65" width="268" height="47"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tiene procesos complementarios entre matriz y Sitios Remotos?
+                                 si                       no]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="122" y="90" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="121" y="90" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proceso_complementario}.intValue() == 1 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="204" y="90" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="203" y="90" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proceso_complementario}.intValue() == 0 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="283" y="66" width="268" height="47"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tiene procesos complementarios entre Sitios Remotos?
+
+                                 si                       no]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="401" y="90" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="400" y="90" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proceso_complementario_SR}.intValue() == 1 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="483" y="90" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="482" y="90" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proceso_complementario_SR}.intValue() == 0 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="116" width="268" height="47"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Existen procesos independientes en Sitios Remotos?
+
+                                 si                       no]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="123" y="140" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="122" y="140" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proceso_independiente}.intValue() == 1 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="205" y="140" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="204" y="140" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proceso_independiente}.intValue() == 0 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="283" y="115" width="268" height="47"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ha tenido auditorías en Sitios Remotos?
+
+                                 si                       no]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="401" y="138" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="400" y="138" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{auditoria_SR}.intValue() == 1 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="483" y="138" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="482" y="138" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{auditoria_SR}.intValue() == 0 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="164" width="268" height="47"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ha tenido quejas de clientes en Sitios Remotos?
+
+                                 si                       no]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="123" y="187" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="122" y="187" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{queja_SR}.intValue() == 1 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="205" y="187" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="204" y="187" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{queja_SR}.intValue() == 0 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="283" y="164" width="268" height="47"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tiene incluidos todos los Sitios Remotos en el Alcance de su SGC?
+                                 si                       no]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="401" y="187" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="400" y="187" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{inclusion_SR_alcance}.intValue() == 1 ? "X" : " "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="483" y="187" width="16" height="14"/>
+			</rectangle>
+			<textField>
+				<reportElement x="482" y="187" width="16" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{inclusion_SR_alcance}.intValue() == 0 ? "X" : " "]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

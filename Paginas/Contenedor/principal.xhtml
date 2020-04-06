@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">      
+    <h:head>  
+        <h:outputStylesheet library="css" name="skins.css"/>
+    </h:head>
+    <style type="text/css">
+        .ui-layout-unit-content {  
+            overflow: hidden !important;
+        }
+
+    </style>   
+    <script type="text/javascript">
+    </script>
+    <h:body>   
+        <ui:include src="sessionTimeOut.xhtml"/> 
+        <div id="layout-header" class="Unselectable fontRegular white">
+            <h:form>                
+                <ul id="sm-topmenu" class="layout-header-widgets Fs14">
+                    <span class="Fs18 Fleft"><span class="white TexAlCenter">SCP</span><span class="white"></span></span>
+                    <li class="Fleft BordRadHalf TexAlCenter"><i class="#{contenedorEncabezado.autentifica.empleado.genero == 1 ? 'icon-user-male' : 'icon-user-female'}"></i>
+                        <ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+                            <li class="Animated05"><a class="white Unselectable"><i class="#{contenedorEncabezado.autentifica.empleado.genero == 1 ? 'icon-user-male' : 'icon-user-female'} Fs18 OvHidden white"></i><span class="Fs12 white"> #{contenedorEncabezado.autentifica.login}<br/></span></a></li>
+                            <li class="Animated01"><a class="white" href="informacion.xhtml" target="iFrameMain"><i class="Fs14 OvHidden white">#{contenedorEncabezado.autentifica.empleado.idPerfil != 6 ? 'Figura Operativa:' : 'Información de la cuenta'} </i><span class="Fs12 white"><br/>#{contenedorEncabezado.autentifica.empleado.idPerfil != 6 ? contenedorEncabezado.perfil : ''}</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="Fleft BordRadHalf TexAlCenter"><i class="icon-mail"></i><span class="alertBubble BordRad10 Fs9">3</span>
+                        <ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+                            <li class="Animated05"><a href="#" class="white Unselectable TexAlLeft"><i class="icon-chat-empty yellow">Sin Mensajes Pendientes...</i><br/><span class="Fs10 white">Ningún mensaje</span></a></li>
+                            <!--h:outputText  escape="false" value="{admeenAutenticacion.cadenaAvisos}"/-->
+                        </ul>
+                    </li> 
+                    <li class="Fleft BordRadHalf TexAlCenter">
+                        <p:commandLink action="#{accesoLogin.logout}" title="Cerrar sesión" target="_top" id="clEjecutar" ajax="false">
+                            <i class="icon-power white"></i></p:commandLink>                        
+                    </li>
+                    <p:spacer width="15" height="1"/>
+                </ul> 
+            </h:form>
+        </div>
+        <!--div style="float:left; padding-top:60px; position:relative; width:20%; height: 90%;">
+            <ui:include src="menu.xhtml"></ui:include>
+        </div>
+        <div id="layout-portlets-cover" class="fontRegular">
+            <div class="Container100Center">
+                <iframe scrolling="auto" height="100%" frameborder="0" width="100%" name="iFrameMain" id="iFrameMain" pane="center"></iframe>
+                <p:idleMonitor timeout="1799940" >
+                    <p:ajax event="idle" oncomplete="alert('Su sesión ha expirado')"/>
+                </p:idleMonitor>
+            </div>
+        </div-->
+        <p:layout fullPage="true" id="layoutP"><!--listener="{admeenAutenticacion.terminoSesion()}"-->
+            <p:layoutUnit position="north" size="68" collapsible="true" style="overflow: no-display;overflow-x: no-display;overflow-y: no-display">
+                <ui:include src="encabezado.xhtml"></ui:include>
+            </p:layoutUnit>
+            <p:layoutUnit position="west" size="250" header="Opciones de menú" resizable="true" closable="false" collapsible="true">
+                <ui:include src="menu.xhtml"></ui:include>
+            </p:layoutUnit>
+            <p:layoutUnit position="center" id="contenedor">
+                <iframe scrolling="auto" height="100%" frameborder="0" 
+                        width="100%" name="iFrameMain" id="iFrameMain" 
+                        pane="center" src="informacion.xhtml"></iframe>
+                <p:idleMonitor timeout="1799940" >
+                    <p:ajax event="idle" oncomplete="alert('Su sesión ha expirado')"/>
+                </p:idleMonitor>
+            </p:layoutUnit>
+        </p:layout>
+        <h:outputScript name="js/layout.js" library="sentinel-layout" />        
+        <h:outputStylesheet name="css/core-layout.css" library="sentinel-layout" />
+        <h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
+        <h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />        
+    </h:body>
+</html>

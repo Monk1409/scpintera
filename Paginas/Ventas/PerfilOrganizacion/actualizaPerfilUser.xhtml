@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">      
+    <h:head>  
+        <h:outputStylesheet library="css" name="skins.css"/>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
+    </h:head>
+    <style type="text/css">
+        .test{ display: flex; margin-bottom: 30px; }
+    </style>   
+    <h:body>   
+        <h:form id="datos" enctype="multipart/form-data">
+            <p:panel header="Actualización al Perfil de la organización">  
+                <p:commandButton value="Revisar Código Nace" icon="fa fa-check-square-o" type="button" onclick="PF('dlg').show();" rendered="#{actualizaPerfilUser.aplicaPerfil}"/>
+                <p:spacer width="25" height="10"/><br/><br/>
+                <p:wizard flowListener="#{actualizaPerfilUser.onFlowProcess}" backLabel="Regresar" nextLabel="Siguiente">
+                    <p:tab id="personal" title="Generales" titleStyle="font-size: small;">
+                        <p:panel header="Generales">
+                            <p:outputPanel id="opGral" style="overflow: auto; height: 400px">
+                                <p:messages />
+                                <p:panelGrid columnClasses="label, value" styleClass="perfilGrid" style="width:99%;">
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <h:outputText value="* Nombre de la organización:" />
+                                        </p:column> 
+                                        <p:column colspan="2">
+                                            <h:outputText value="* Nombre Comercial:" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <p:inputText value="#{actualizaPerfilUser.perfilDatosGenerales.nombreOrganizacion}" 
+                                                         required="true" requiredMessage="Por favor escriba el nombre de su organización."/>
+                                        </p:column>
+                                        <p:column colspan="2">
+                                            <p:inputText value="#{actualizaPerfilUser.perfilDatosGenerales.nombreComercial}" 
+                                                         required="true" requiredMessage="Por favor escriba el nombre comercial."/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="* Calle:" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText value="#{actualizaPerfilUser.perfilDatosGenerales.calle}" 
+                                                         required="true" requiredMessage="Por favor escriba un nombre de calle."/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="* Número: " />
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText value="#{actualizaPerfilUser.perfilDatosGenerales.numero}" 
+                                                         required="true" requiredMessage="Por favor escriba un número."/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="* Código Postal:" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="cp" value="#{actualizaPerfilUser.perfilDatosGenerales.cp}" 
+                                                         required="true" requiredMessage="Por favor escriba el código postal."/>
+                                            <p:spacer width="10"/>
+                                            <!--p:commandButton id="buscar" widgetVar="wvBuscar" icon="ui-icon-search" title="Buscar Código Postal"
+                                                             update="cp colonia ciudad estado pais"
+                                                             onclick="PF('bloqueo').show();"
+                                                             action="{actualizaPerfilUser.abrirVentana}">
+                                            </p:commandButton-->
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="* Colonia:" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="colonia" value="#{actualizaPerfilUser.perfilDatosGenerales.colonia}" 
+                                                         required="true" requiredMessage="Por favor escriba la colonia."/>
+                                            <p:spacer width="10"/>
+                                            <!--p:commandButton id="buscarColonia" widgetVar="wvBuscar2" icon="ui-icon-search" title="Buscar Colonia"
+                                                             update="cp colonia ciudad estado pais"
+                                                             onclick="PF('bloqueo').show();"
+                                                             action="{actualizaPerfilUser.abrirVentana}">
+                                            </p:commandButton-->
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="* Ciudad:" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="ciudad" value="#{actualizaPerfilUser.perfilDatosGenerales.ciudad}" 
+                                                         required="true" requiredMessage="Por favor escriba la ciudad."/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="* Estado:" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="estado" value="#{actualizaPerfilUser.perfilDatosGenerales.estado}" 
+                                                         required="true" requiredMessage="Por favor escriba el estado."/>
+                                        </p:column>
+                                    </p:row> 
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="* País: " />
+                                        </p:column>
+                                        <p:column colspan="3">
+                                            <p:inputText id="pais" value="#{actualizaPerfilUser.perfilDatosGenerales.pais}" 
+                                                         required="true" requiredMessage="Por favor escriba el país."/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="* Teléfono:" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText value="#{actualizaPerfilUser.perfilDatosGenerales.telefono}" 
+                                                         required="true" requiredMessage="Por favor escriba el teléfono."/>
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="Fax:" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText value="#{actualizaPerfilUser.perfilDatosGenerales.fax}"/>
+                                        </p:column>
+                                    </p:row>             
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="* Contacto: " />
+                                        </p:column>                                
+                                        <p:column>
+                                            <p:inputText value="#{actualizaPerfilUser.perfilDatosGenerales.contacto1}" 
+                                                         required="true" requiredMessage="Por favor escriba un nombre de contacto."/>
+                                        </p:column>
+                                        <p:column rowspan="2">
+                                            <h:outputText value="* Cargo/Área:" />                                         
+                                        </p:column> 
+                                        <p:column rowspan="2">
+                                            <p:inputText value="#{actualizaPerfilUser.perfilDatosGenerales.cargo1}" 
+                                                         required="true" requiredMessage="Por favor escriba el cargo o el área."/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="* Email:" />
+                                        </p:column>                                
+                                        <p:column>
+                                            <p:inputText value="#{actualizaPerfilUser.perfilDatosGenerales.email1}" 
+                                                         required="true" requiredMessage="Por favor escriba un email."
+                                                         validatorMessage="Correo electrónico inválido.">
+                                                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                            </p:inputText>
+                                        </p:column>                                          
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Contacto Adicional:" />
+                                        </p:column>                                
+                                        <p:column>
+                                            <p:inputText value="#{actualizaPerfilUser.perfilDatosGenerales.contacto2}" />
+                                        </p:column>
+                                        <p:column rowspan="2">
+                                            <h:outputText value="Cargo/Área:" />                                         
+                                        </p:column> 
+                                        <p:column rowspan="2">
+                                            <p:inputText value="#{actualizaPerfilUser.perfilDatosGenerales.cargo2}" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="Email Adicional:" />
+                                        </p:column>                                
+                                        <p:column>
+                                            <p:inputText value="#{actualizaPerfilUser.perfilDatosGenerales.email2}" />
+                                        </p:column>                                          
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="facturacion" title="Facturación" titleStyle="font-size: small;">
+                        <p:panel header="Datos de Facturación">
+                            <p:panel>
+                                <p:outputLabel value="Mostrar información para editar datos de facturación (Si aplica): "/> 
+                                <p:selectBooleanCheckbox value="#{actualizaPerfilUser.factura}">
+                                    <p:ajax event="change" update="datos:opFactura"/>
+                                </p:selectBooleanCheckbox>
+                            </p:panel>
+                            <br/>
+                            <p:outputPanel id="opFactura" style="overflow: auto; height: 300px">
+                                <p:messages />
+                                <p:panelGrid rendered="#{actualizaPerfilUser.factura}" columnClasses="label, value" styleClass="perfilGrid" style="width:99%;text-align: justify;">
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="* Razón Social:"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="razonSoc" value="#{actualizaPerfilUser.perfilFacturacion.razonSocial}" maxlength="200"
+                                                         required="true" requiredMessage="Por favor indique la Razón Social."/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="* RFC:"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="rfc" value="#{actualizaPerfilUser.perfilFacturacion.rfc}" maxlength="20"
+                                                         required="true" requiredMessage="Por favor indique el RFC."/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="* Domicilio:"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputTextarea id="domFact" value="#{actualizaPerfilUser.perfilFacturacion.domicilio}" maxlength="200"
+                                                             required="true" requiredMessage="Por favor indique el Domicilio."/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="* Contacto para facturación o Cobranza:"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="contactoFact" value="#{actualizaPerfilUser.perfilFacturacion.contacto}" maxlength="200"
+                                                         required="true" requiredMessage="Por favor indique el Contacto para facturación o cobranza."/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <h:outputText value="* Correo electrónico y/o Teléfono:"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputTextarea id="correoTelFact" value="#{actualizaPerfilUser.perfilFacturacion.correoTelefono}" maxlength="100"
+                                                             required="true" requiredMessage="Por favor indique el correo electrónico o teléfono."/>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="actividad" title="Actividad Operativa" titleStyle="font-size: small;">                        
+                        <p:panel header="Actividad Operativa">
+                            <p:outputPanel id="opActOp" style="overflow: auto; height: 400px">
+                                <p:messages />
+                                <p:panelGrid columnClasses="label, value" styleClass="perfilGrid" style="width:99%;text-align: justify;">
+                                    <p:row>
+                                        <p:column>
+                                            <p:outputLabel value="* Indique el Alcance del Sistema de Gestión de calidad indicado en su manual de Calidad:"/>
+                                            <p:spacer width="10"/>
+                                            <p:outputLabel style="font-size: x-small" value="(Ver ejemplo en Anexo 1)"/>
+                                            <p:spacer width="10"/>
+                                            <p:commandButton icon="fa fa-question-circle" value="Anexo 1" title="Ver ejemplo" onclick="PF('dlgAnexo1').show();"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText id="alcance" value="#{actualizaPerfilUser.perfilActividadOper.alcance}" 
+                                                         required="true" requiredMessage="Por favor indique el alcance del sistema de gestión de calidad."/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:spacer width="10" height="10"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:outputLabel value="En caso de haber cambios en el sistema de gestión de calidad de su organización en relación al alcance descrito anteriormente, favor de indicar que actividades, procesos, productos, equipos o bien áreas de trabajo que fueron sujetos a cambios."/>
+                                            <p:spacer width="10"/>
+                                            <p:outputLabel style="font-size: x-small" value="(Ver ejemplo en Anexo 2)"/>
+                                            <p:spacer width="10"/>
+                                            <p:commandButton icon="fa fa-question-circle" value="Anexo 2" title="Ver ejemplo" onclick="PF('dlgAnexo2').show();"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:dataTable id="actividadActualizar" widgetVar="wvEmpleados" 
+                                                         value="#{actualizaPerfilUser.listaCambios}"                   
+                                                         var="cambioAct" rowHover="true" 
+                                                         emptyMessage="No se han agregado cambios en el SGC."
+                                                         style="text-align: center">
+                                                <f:facet name="header">
+                                                    <p:commandButton id="agregarCambios" title="Agregar cambios en SGC"
+                                                                     onclick="PF('bloqueo').show();" immediate="true"
+                                                                     action="#{actualizaPerfilUser.agregarCambio}"
+                                                                     oncomplete="PF('bloqueo').hide();"
+                                                                     update="datos:opActOp"
+                                                                     icon="fa fa-plus-square"/>                                                    
+                                                </f:facet>
+                                                <p:columnGroup type="header">
+                                                    <p:row>
+                                                        <p:column style="alignment-adjust: middle; text-align: justify;" headerText="°LÍNEAS DE PRODUCCIÓN"/>
+                                                        <p:column rowspan="5" style="alignment-adjust: middle" width="8%" headerText="Línea(s) de producción"/>
+                                                        <p:column rowspan="5" style="alignment-adjust: middle" width="5%" headerText="Equipo"/>
+                                                        <p:column rowspan="5" style="alignment-adjust: middle" width="5%" headerText="Área de trabajo"/>
+                                                        <p:column rowspan="5" style="alignment-adjust: middle" width="8%" headerText="Procesos de servicios"/>
+                                                        <p:column rowspan="5" style="alignment-adjust: middle" headerText="BREVE DESCRIPCIÓN DEL PROCESO O ACTIVIDADES NUEVAS"/>
+                                                        <p:column rowspan="5" style="alignment-adjust: middle" headerText="TURNOS Y HORARIOS"/>
+                                                        <p:column rowspan="5" style="alignment-adjust: middle" width="8%" headerText="Opciones"/>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column style="alignment-adjust: middle; text-align: justify;" headerText="°EQUIPOS DE PRODUCCIÓN"/>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column style="alignment-adjust: middle; text-align: justify;" headerText="°ÁREAS DE TRABAJO"/>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column style="alignment-adjust: middle; text-align: justify;" headerText="°PROCESOS DE SERVICIOS"/>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column style="alignment-adjust: middle; text-align: justify;" headerText="°NUEVO PRODUCTOS"/>
+                                                    </p:row>
+                                                </p:columnGroup>
+                                                <p:column>
+                                                    <p:inputTextarea id="cambio" value="#{cambioAct.cambioDes}" maxlength="200"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:selectBooleanCheckbox id="linea" value="#{cambioAct.lineaProduccion}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:selectBooleanCheckbox id="equipo" value="#{cambioAct.equipo}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:selectBooleanCheckbox id="areaTra" value="#{cambioAct.areaTrabajo}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:selectBooleanCheckbox id="prodSer" value="#{cambioAct.procesoServicios}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:inputTextarea id="desProc" value="#{cambioAct.descripcionProcesoAct}" maxlength="200"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:inputTextarea id="turnos" value="#{cambioAct.turnoHorario}" maxlength="100"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:commandButton icon="ui-icon-close" title="Eliminar" action="#{actualizaPerfilUser.eliminarCambio}"
+                                                                     update="datos:actividadActualizar">
+                                                        <f:setPropertyActionListener value="#{cambioAct}" target="#{actualizaPerfilUser.seleccionadoListaCambios}"/>
+                                                    </p:commandButton>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>                                
+                                <p:dialog header="ANEXO 1" widgetVar="dlgAnexo1" modal="true" resizable="false" height="450px">
+                                    <h:graphicImage url="../../../../Librerias/Imagenes/Base/Anexo1.png" width="90%" height="90%"/>
+                                    <br/>
+                                    <h:graphicImage url="../../../../Librerias/Imagenes/Base/Anexo1ActPer.PNG" width="90%" height="90%"/>
+                                </p:dialog>
+                                <p:dialog header="ANEXO 2" widgetVar="dlgAnexo2" modal="true" resizable="false" height="450px">
+                                    <h:graphicImage url="../../../../Librerias/Imagenes/Base/Anexo2ActPer.PNG" width="90%" height="90%"/>
+                                </p:dialog>
+                            </p:outputPanel>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="empleados" title="Empleados" titleStyle="font-size: small;">
+                        <p:panel header="Empleados">
+                            <p:outputPanel id="opEmp" style="overflow: auto; height: 300px">
+                                <p:messages />                                
+                                <p:panelGrid columnClasses="label, value" styleClass="perfilGrid" style="width:99%;text-align: justify;">
+                                    <p:row>
+                                        <p:column>
+                                            <p:outputLabel value="* Total de personal en la organización"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="totalPersonal" value="#{actualizaPerfilUser.perfilEmpleadosOrg.totalEmpresa}" 
+                                                         required="true" requiredMessage="Por favor indica el total de personal en la organización"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:outputLabel value="* Total del personal incluido dentro del alcance de la certificación del sistema de gestión de calidad"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="totalIncluido" value="#{actualizaPerfilUser.perfilEmpleadosOrg.totalAlcance}" 
+                                                         required="true" requiredMessage="Por favor indica el total del personal incluido dentro del alcance de la certificación del sistema de gestión de calidad"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:spacer width="10" height="10"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:outputLabel value="* Total de personal en el domicilio Matriz"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="totalDomicilio" value="#{actualizaPerfilUser.perfilEmpleadosOrg.totalDomicilio}" 
+                                                         required="true" requiredMessage="Por favor indica el total de personal en el domicilio Matriz"/>
+                                        </p:column>
+                                        <!--p:column>
+                                            <p:outputLabel value="Total en producción/servicio (en este domicilio)"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:inputText id="totalProd" onchange="rc();" value="{actualizaPerfilUser.perfilEmpleadosOrg.totalProdSer}" />
+                                        </p:column-->
+                                        <!--/p:row>
+                                        <p:row>
+                                            <p:column colspan="4">
+                                                <p:spacer width="10" height="10"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <p:outputLabel value="Total administrativos (en este domicilio)"/>
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputText id="totalAdmin" onchange="rc();" value="{actualizaPerfilUser.perfilEmpleadosOrg.totalAdmin}" />
+                                            </p:column>
+                                            <p:column>
+                                                <p:outputLabel value="Total en Diseño (sí aplica) (en este domicilio)"/>
+                                            </p:column>
+                                            <p:column>
+                                                <p:inputText id="totalDisenio" onchange="rc();" value="{actualizaPerfilUser.perfilEmpleadosOrg.totalDisenio}" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="4">
+                                                <p:spacer width="10" height="10"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <p:outputLabel value="Total Calidad (en este domicilio)"/>
+                                            </p:column>
+                                            <p:column colspan="3">
+                                                <p:inputText id="totalCalidad" onchange="rc();" value="{actualizaPerfilUser.perfilEmpleadosOrg.totalCalidad}" />
+                                            </p:column>                                    
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="4">
+                                                <p:spacer width="10" height="10"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row-->
+                                        <p:column colspan="2">
+                                            <p:outputLabel value="* Indique el sistema de turnos con los que opera la organización"/><!--, incluyendo los sitios remotos (cuando aplique).-->
+                                            <br/><br/>
+                                            <p:outputLabel value="Matriz:"/>
+                                            <br/><br/>
+                                            <p:selectManyCheckbox id="matrizTurnos" value="#{actualizaPerfilUser.valorChk4}" layout="grid" columns="3"
+                                                                  required="true" requiredMessage="Por favor indica el sistema de turnos con los que opera la organización">                                                        
+                                                <f:selectItem itemLabel="Matutino" itemValue="1" />
+                                                <f:selectItem itemLabel="Vespertino" itemValue="2" />
+                                                <f:selectItem itemLabel="Nocturno" itemValue="3" />
+                                            </p:selectManyCheckbox>
+                                            <!--br/>
+                                            <p:outputLabel value="Sitios remotos: Favor de especificar (si aplica)"/-->                                        
+                                        </p:column>                                    
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="reqMultisitios" title="Multisitios" titleStyle="font-size: small;">
+                        <p:panel header="Requerimientos para Organización Multisitios">
+                            <p:panel>
+                                <p:outputLabel value="Las organizaciones Multisitios son aquellas que cuentan con uno o más sitios remotos 
+                                               y que hacen actividades iguales o complementarias a las que realiza la matriz."/> 
+                                <br/>
+                                <p:outputLabel value="Mostrar información para editar datos de Multisitios (Si aplica): "/> 
+                                <p:selectBooleanCheckbox value="#{actualizaPerfilUser.multisitios}">
+                                    <p:ajax event="change" update="datos:opReqMult"/>
+                                </p:selectBooleanCheckbox>
+                            </p:panel>
+                            <br/>
+                            <p:outputPanel id="opReqMult" style="overflow: auto; height: 250px">
+                                <p:messages />
+                                <p:panelGrid rendered="#{actualizaPerfilUser.multisitios}" columnClasses="label, value" styleClass="perfilGrid" style="width:99%;text-align: justify;">                                                                    
+                                    <p:row>
+                                        <p:column>
+                                            <p:outputLabel value="* ¿Tiene los mismos procesos en Matriz y Sitios Remotos?:"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:outputLabel value="* ¿Tiene procesos complementarios entre Matriz y Sitios Remotos?:"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:selectOneRadio id="mismoMSR" value="#{actualizaPerfilUser.perfilMultisitios.procesoIgual}" layout="grid" columns="2"
+                                                              required="true" requiredMessage="Por favor indica si tiene los mismos procesos en Matriz y Sitios Remotos">
+                                                <f:selectItem itemLabel="Sí" itemValue="1" />
+                                                <f:selectItem itemLabel="No" itemValue="2" />
+                                            </p:selectOneRadio>
+                                        </p:column>
+                                        <p:column>
+                                            <p:selectOneRadio id="complementoMSR" value="#{actualizaPerfilUser.perfilMultisitios.procesoComplementario}" layout="grid" columns="2"
+                                                              required="true" requiredMessage="Por favor indica si tiene procesos complementarios entre Matriz y Sitios Remotos">
+                                                <f:selectItem itemLabel="Sí" itemValue="1" />
+                                                <f:selectItem itemLabel="No" itemValue="2" />
+                                            </p:selectOneRadio>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:outputLabel value="* ¿Tiene procesos complementarios entre Sitios Remotos?:"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:outputLabel value="* ¿Existen procesos independientes en Sitios Remotos?:"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:selectOneRadio id="complementoSR" value="#{actualizaPerfilUser.perfilMultisitios.procesoComplementarioSr}" layout="grid" columns="2"
+                                                              required="true" requiredMessage="Por favor indica si tiene procesos complementarios entre Sitios Remotos">
+                                                <f:selectItem itemLabel="Sí" itemValue="1" />
+                                                <f:selectItem itemLabel="No" itemValue="2" />
+                                            </p:selectOneRadio>
+                                        </p:column>
+                                        <p:column>
+                                            <p:selectOneRadio id="independienteSR" value="#{actualizaPerfilUser.perfilMultisitios.procesoIndependienteSr}" layout="grid" columns="2"
+                                                              required="true" requiredMessage="Por favor indica si existen procesos independientes en Sitios Remotos">
+                                                <f:selectItem itemLabel="Sí" itemValue="1" />
+                                                <f:selectItem itemLabel="No" itemValue="2" />
+                                            </p:selectOneRadio>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:outputLabel value="* ¿Ha tenido auditorías en Sitios Remotos?:"/>
+                                        </p:column>
+                                        <p:column>
+                                            <p:outputLabel value="* ¿Ha tenido quejas de clientes en Sitios Remotos?:"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:selectOneRadio id="auditoriaSR" value="#{actualizaPerfilUser.perfilMultisitios.auditoriaSr}" layout="grid" columns="2"
+                                                              required="true" requiredMessage="Por favor indica si ha tenido auditorías en Sitios Remotos">
+                                                <f:selectItem itemLabel="Sí" itemValue="1" />
+                                                <f:selectItem itemLabel="No" itemValue="2" />
+                                            </p:selectOneRadio>
+                                        </p:column>
+                                        <p:column>
+                                            <p:selectOneRadio id="quejaSR" value="#{actualizaPerfilUser.perfilMultisitios.quejaSr}" layout="grid" columns="2"
+                                                              required="true" requiredMessage="Por favor indica si ha tenido quejas de clientes en Sitios Remotos">
+                                                <f:selectItem itemLabel="Sí" itemValue="1" />
+                                                <f:selectItem itemLabel="No" itemValue="2" />
+                                            </p:selectOneRadio>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <p:outputLabel value="* ¿Tiene incluidos todos los Sitios Remotos en el Alcance de su SGC?:"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <p:selectOneRadio id="incluyeSRSGC" value="#{actualizaPerfilUser.perfilMultisitios.inclusionSrAlcance}" layout="grid" columns="2"
+                                                              required="true" requiredMessage="Por favor indica si tiene incluidos todos los Sitios Remotos en el Alcance de su SGC">
+                                                <f:selectItem itemLabel="Sí" itemValue="1" />
+                                                <f:selectItem itemLabel="No" itemValue="2" />
+                                            </p:selectOneRadio>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <p:spacer height="10"/>
+                                        </p:column>
+                                    </p:row>                                    
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="multisitiosAdicionales" title="Multisitios Adicionales" titleStyle="font-size: small;">
+                        <p:panel header="Multisitios adicionales">
+                            <p:panel>
+                                <p:outputLabel value="¿Tiene la empresa varios locales que quiere Usted que participen en la certificación? "/> 
+                                <p:selectBooleanCheckbox value="#{actualizaPerfilUser.multisitiosAdi}">
+                                    <p:ajax event="change" update="datos:opReqMultAdi"/>
+                                </p:selectBooleanCheckbox>
+                            </p:panel>
+                            <br/>
+                            <p:outputPanel id="opReqMultAdi" style="overflow: auto; height: 280px">
+                                <p:messages />
+                                <p:panelGrid rendered="#{actualizaPerfilUser.multisitiosAdi}" columnClasses="label, value" styleClass="perfilGrid" style="width:99%;text-align: justify;">                                                                    
+                                    <p:row>
+                                        <p:column>
+                                            <p:dataTable id="multisitiosAdic" widgetVar="wvMultiAdic" 
+                                                         value="#{actualizaPerfilUser.listaMultiAdic}"                   
+                                                         var="multiAdic" rowHover="true" 
+                                                         emptyMessage="No se han agregado Multisitios Adicionales."
+                                                         style="text-align: center">
+                                                <f:facet name="header">
+                                                    <p:commandButton id="agregarMultiAdic" title="Agregar multisitios adicionales"
+                                                                     onclick="PF('bloqueo').show();" immediate="true"
+                                                                     actionListener="#{actualizaPerfilUser.agregarMutiAdic}"
+                                                                     oncomplete="PF('bloqueo').hide();"
+                                                                     update="datos:opReqMultAdi"
+                                                                     icon="fa fa-plus-square"/>                                                    
+                                                </f:facet>
+                                                <p:columnGroup type="header">
+                                                    <p:row>
+                                                        <p:column rowspan="2" headerText="NOMBRE Y DIRECCIÓN" width="20%"/>
+                                                        <p:column colspan="4" headerText="NÚMERO DE EMPLEADOS"/>
+                                                        <p:column rowspan="2" headerText="Opciones"/>
+                                                    </p:row>
+                                                    <p:row>                                                        
+                                                        <p:column headerText="CALIDAD" />
+                                                        <p:column headerText="PRODUCCIÓN" />
+                                                        <p:column headerText="DISEÑO" />
+                                                        <p:column headerText="ADMINISTRACIÓN" />
+                                                    </p:row>
+                                                </p:columnGroup>
+                                                <p:column>
+                                                    <p:inputTextarea id="nomDirAdic" value="#{multiAdic.nombreDirAdic}" maxlength="300"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:inputText id="calidad" value="#{multiAdic.calidad}" style="width: 30%"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:inputText id="produccion" value="#{multiAdic.produccion}" style="width: 30%"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:inputText id="disenio" value="#{multiAdic.disenio}" style="width: 30%"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:inputText id="admin" value="#{multiAdic.admin}" style="width: 30%"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:commandButton icon="ui-icon-close" title="Eliminar" action="#{actualizaPerfilUser.eliminarMutiAdic}"
+                                                                     update="datos:multisitiosAdic">
+                                                        <f:setPropertyActionListener value="#{multiAdic}" target="#{actualizaPerfilUser.seleccionadoListaMultiAdic}"/>
+                                                    </p:commandButton>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="concluir" title="Concluir" titleStyle="font-size: small;" rendered="#{actualizaPerfilUser.autentifica.empleado.idPerfil==3?'false':'true'}">
+                        <p:panel header="Concluir Actualización del Perfil de la Organización">
+                            <p:outputPanel id="opConcluir" style="height: 280px; text-align: justify; font-size: medium">                                
+                                <p>
+                                    Al presionar el botón de <b>"Concluir Actualización"</b> se enviará un correo electrónico para que la información 
+                                    proporcionada sea revisada por INTERA. 
+                                </p>
+                                <p>
+                                    Usted puede seguir consultando y actualizando la información las veces que sean necesarias, si desea 
+                                    que el equipo de INTERA revise dichos cambios deberá siempre dar click en el botón de <b>"Concluir Actualización"</b>.
+                                </p>
+                                <p>
+                                    Agradecemos el tiempo que se tomó al llenar la información de Actualización del Perfil de la Organización, a la brevedad nos
+                                    pondremos en contacto con usted para continuar con las etapas del proceso.
+                                </p>
+                                <br/><br/>
+                                <p:commandButton icon="fa fa-check" value="Concluir Perfil" 
+                                                 action="#{actualizaPerfilUser.concluirPerfil}" onclick="PF('bloqueo').show();"
+                                                 oncomplete="PF('bloqueo').hide();"/>
+                            </p:outputPanel>
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+                <p:dialog header="Revisión del Código Nace" widgetVar="dlg" modal="true" resizable="false" height="50%" rendered="#{actualizaPerfilUser.autentifica.empleado.idPerfil==3?'true':'false'}">
+                    <h:form>
+                        <p:panel>
+                            <br/>
+                            <p:messages autoUpdate="true"/>
+                            <p:panelGrid columns="2" styleClass="perfilGrid">                        
+                                <p:outputLabel value="Código NACE:"/>
+                                <p:inputText value="#{actualizaPerfilUser.revisionSolicitud.codigoNace}" autocomplete="true" maxlength="50" size="50"
+                                             required="true" requiredMessage="Por favor indica el código NACE."/>
+                                <br/>
+                            </p:panelGrid>
+                            <br/>
+                            <p:commandButton id="guardaRev" icon="fa fa-floppy-o" value="Guardar" validateClient="true" 
+                                             action="#{actualizaPerfilUser.guardaRevision}" ajax="true"/>
+                            <br/><br/>
+                        </p:panel>
+                    </h:form>
+                </p:dialog>
+            </p:panel>
+            <p:blockUI block="datos" widgetVar="bloqueo">
+                Procesando información, espere un momento por favor...<br/>
+                <br/> 
+                <p:graphicImage width="45" height="45" value="/Librerias/Imagenes/Base/loading.gif"/> 
+            </p:blockUI>
+        </h:form>
+    </h:body>
+</html>

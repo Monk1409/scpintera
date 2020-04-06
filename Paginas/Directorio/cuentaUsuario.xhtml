@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">  
+    <h:head>
+        <h:outputStylesheet library="css" name="skins.css"/>
+        <script type="text/javascript"> 
+            function aceptar(){
+                document.getElementById("datos:clEjecutar").click();
+            }
+        </script>
+    </h:head>
+    <h:body>   
+        <h:form id="datos">
+            <c:set property="out" target="#{paginaTitulo}" value="#{cuentaUsuario.titulo}"/>
+            <p:growl id="mensaje" for="mensaje" showDetail="true" autoUpdate="true" life="5000"/>
+            <h:outputText id="titulo" escape="false" value="#{paginaTitulo.out}"/>
+            <p:spacer width="10" height="10" />
+            <p:panel id="panel" header="Información de contacto">
+                <p:messages id="msgs" showDetail="true" redisplay="false"/>
+                <h:panelGrid columns="3" style="margin: 0 auto;" cellpadding="5">
+                    <p:outputLabel style="font-weight: bold;" value="Nombre(s):"/>
+                    <p:inputText id="nombre" value="#{cuentaUsuario.registro.nombres}" 
+                                 style="width: 300px; text-transform: uppercase" maxlength="50"
+                                 required="true" requiredMessage="Por favor escriba un nombre de contacto."
+                                 validatorMessage="El nombre de contacto es muy corto.">
+                        <f:validateLength minimum="2" />                      
+                    </p:inputText> 
+                    <p:message for="nombre" />
+                    <p:outputLabel style="font-weight: bold;" value="Apellido paterno:"/>
+                    <p:inputText id="app" value="#{cuentaUsuario.registro.apellidoPat}" 
+                                 style="width: 300px; text-transform: uppercase" maxlength="50"
+                                 required="true" requiredMessage="Por favor escriba el apellido paterno del contacto."
+                                 validatorMessage="El apellido paterno del contacto es muy corto.">
+                        <f:validateLength minimum="2" />
+                    </p:inputText> 
+                    <p:message for="app" />
+                    <p:outputLabel style="font-weight: bold;" value="Apellido materno:"/>
+                    <p:inputText id="apm" value="#{cuentaUsuario.registro.apellidoMat}" 
+                                 style="width: 300px; text-transform: uppercase" maxlength="50"
+                                 required="true" requiredMessage="Por favor escriba el apellido materno del contacto."
+                                 validatorMessage="El apellido materno del contacto es muy corto.">
+                        <f:validateLength minimum="2" />
+                    </p:inputText> 
+                    <p:message for="apm" /> 
+                    <p:outputLabel style="font-weight: bold;" value="Correo electrónico:"/>
+                    <p:inputText id="email" value="#{cuentaUsuario.registro.email}" 
+                                 style="width: 300px; text-transform: lowercase" maxlength="60"
+                                 required="true" requiredMessage="Por favor escriba un correo electrónico válido."
+                                 validatorMessage="Correo electrónico inválido.">
+                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                    </p:inputText>
+                    <p:message for="email" />
+                    <p:outputLabel style="font-weight: bold;" value="Teléfono:"/>
+                    <p:inputMask id="telefono" value="#{cuentaUsuario.registro.telefono}" 
+                                 style="width: 300px; text-transform: lowercase" maxlength="50"
+                                 required="true" requiredMessage="Por favor escriba un teléfono válido."
+                                 mask="(999) 999-9999? ext 99999"/>
+                    <p:message for="telefono" />
+                    <p:outputLabel style="font-weight: bold;" value="Nombre de usuario:"/>
+                    <p:outputLabel id="user" value="#{cuentaUsuario.autentifica.login}" 
+                                   style="width: 300px;" title="El nombre de usuario es tú correo electrónico."/> 
+                    <p:message for="user" /> 
+                    <p:outputLabel style="font-weight: bold;" value="Contraseña:"/>
+                    <p:password id="pass1" value="#{cuentaUsuario.autentifica.password}" 
+                                 style="width: 300px;" maxlength="50" feedback="true"
+                                 match="pass2" weakLabel="Débil" goodLabel="Bien" strongLabel="Fuerte"
+                                 required="true" requiredMessage="Por favor escriba una contraseña."
+                                 validatorMessage="La contraseña es muy corta.">
+                        <f:validateLength minimum="2" />
+                    </p:password> 
+                    <p:message for="pass1" /> 
+                    <p:outputLabel style="font-weight: bold;" value="Contraseña:"/>
+                    <p:password id="pass2" value="#{cuentaUsuario.autentifica.password}" 
+                                 style="width: 300px;" maxlength="50" feedback="true"
+                                 weakLabel="Débil" goodLabel="Bien" strongLabel="Fuerte"
+                                 required="true" requiredMessage="Por favor escriba una contraseña."
+                                 validatorMessage="La contraseña es muy corta.">
+                        <f:validateLength minimum="2" />
+                    </p:password> 
+                    <p:message for="pass2" /> 
+                </h:panelGrid>
+            </p:panel>
+            <p:spacer width="10" height="10"/>
+            <p:separator/>
+            <p:spacer width="10" height="10"/>
+            <h:panelGrid columns="3" style="text-align: center; margin: 0 auto">
+                <p:commandLink id="modificar" value="Modificar" target="_top" 
+                               style="width: 80px; position: relative; height: 25px; text-align: center; line-height: 20px;"
+                               styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btn"
+                               update="panel" action="#{cuentaUsuario.aceptar}" ajax="false"/>
+            </h:panelGrid>
+            <span class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left">
+                <span class="ui-button-icon-left ui-icon ui-c ui-icon-pencil"><p:commandLink action="#{accesoLogin.aceptar3}" target="_top" id="clEjecutar" ajax="false"/></span>
+            </span>
+            <p:blockUI block="datos" widgetVar="bloqueo" trigger="modificar">
+                Cargando información, espere un momento por favor...<br/>
+                <br/> 
+                <p:graphicImage width="45" height="45" value="/Librerias/Imagenes/Base/loading.gif"/> 
+            </p:blockUI>
+        </h:form>        
+    </h:body>
+</html>

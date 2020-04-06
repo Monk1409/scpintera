@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">    
+    <h:head>  
+        <link href="#{facesContext.externalContext.requestContextPath}/Librerias/Estilos/skins.css" type="text/css" rel="stylesheet"/>
+        <script language="Javascript" type="text/javascript">      
+            var PROCESO           = "datos:proceso";
+            var TABLAS            = "datos:tablas";
+            var OPTION_SELECCIONE = "-Seleccione";
+           
+            function checkCombo(){
+                var indice = document.datos.elements[TABLAS].selectedIndex;  
+                return document.datos.elements[TABLAS].options[indice].text==OPTION_SELECCIONE;              
+            }
+           
+            function validar(){            
+                if ((document.datos.elements[PROCESO].value=='')  || (checkCombo())  ) {
+                    alert('Verifica que tengas una tabla selecciona y captutes un proceso');
+                    return false;
+                }
+                else {
+                    return true;
+                }  
+            }
+        </script>
+    </h:head>
+    <h:body>   
+        <h:form id="datos">
+            <h:outputText escape="false" value="Generación de archivos hibernate" />            
+            <p:growl id="mensaje" showDetail="true" />
+            <p:spacer width="10" height="10" />
+            <table align="center" cellpadding="5" width="100%">
+                <tr>
+                    <td align="right" style=" width: 40%">            
+                        <p:outputLabel for="tablas" value="Tablas:"/>
+                    </td>
+                    <td align="left">
+                        <p:selectOneMenu id="tablas" value="#{dtosGenerarTabla.valorTablas}" label="Seleccione">
+                            <f:selectItems value="#{dtosGenerarTabla.optionsTablas}" />
+                        </p:selectOneMenu>                            
+                    </td>
+                </tr>  
+                <tr>
+                    <td align="right" style=" width: 40%">            
+                        <p:outputLabel for="proceso" value="Proceso:"/>
+                    </td>
+                    <td align="left">
+                        <p:inputText label="Label 1" id="proceso" value="mx.org.agenda.db" style=" width: 50%" disabled="true" alt="Captura proceso ejemplo: proceso.perfil"/>                          
+                    </td>
+                </tr> 
+                <tr>
+                    <td colspan="2" align="center">
+                        <p:panel id="detalleConfiguracion" rendered="false" style="width: 100%">
+                            <table align="center" cellpadding="5" width="100%">
+                                <tr>
+                                    <td style=" width: 30%"> 
+                                        <p:outputLabel for="configuracion" value="Copia esta linea a hibernate.cfg.xml: " style=" font-weight: bold"/>
+                                    </td>
+                                    <td align="left">
+                                        <p:inputText label="Label 2" id="configuracion" style=" width: 100%"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" width: 30%"> 
+                                        <p:outputLabel for="configuracion" value="Copia estas lineas a agenda.xml" style=" font-weight: bold"/>
+                                    </td>
+                                    <td align="left">
+                                        <p:inputTextarea label="Label 1" id="sentencia" style=" width: 100%"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:panel>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <p:separator/> 
+                        <p:spacer width="10" height="10" />
+                        <p:commandButton value="Generar" onclick="return validar()" action="#{dtosGenerarTabla.getTabla}" id="generar"/>
+                    </td>
+                </tr>
+            </table>
+            <p:blockUI block="datos" trigger="datos:generar">
+                Cargando información, espere un momento por favor...<br/>
+                <br/> 
+                <p:graphicImage width="45" height="45" value="/Librerias/Imagenes/Base/loading.gif"/> 
+            </p:blockUI>
+        </h:form>        
+    </h:body>
+</html>

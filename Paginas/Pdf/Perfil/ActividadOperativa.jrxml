@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<field name="field" class="java.lang.String"/>
+	<detail>
+		<band height="683" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="555" height="24"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="2" y="3" width="551" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actividad Operativa]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="25" width="555" height="53"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="25" width="545" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción General de su Proceso (favor de anexar mapa de proceso indicando entradas y salidas)]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="6" y="41" width="545" height="37" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="188" width="276" height="112"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="189" width="268" height="44"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Se requiere algún equipo de protección personal para la visita de auditoria que usted no pueda proporcionar? (En caso afirmativo indique cual)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="6" y="233" width="270" height="65" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="188" width="279" height="112" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="190" width="268" height="43"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Realiza  transacciones comerciales / operaciones bajo otro nombre? (En caso afirmativo indique cuál)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="283" y="234" width="268" height="64" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="300" width="276" height="121"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="301" width="268" height="49"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Tiene la empresa varios locales o sucursales que quiere usted que participen en la certificación (multisitios)? En caso de ser afirmativo favor de indicar los sitios en el Anexo 1 al final del presente registro. ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="6" y="354" width="270" height="66" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="300" width="279" height="121"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="302" width="268" height="48"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Es su empresa subsidiaria de  otra compañía 
+más grande? (En caso afirmativo indique cuál)
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="283" y="354" width="268" height="66" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="613" width="555" height="69"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="614" width="545" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mencione los procesos y/o servicios contratados externamente que se encuentren dentro del alcance del sistema]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="6" y="630" width="545" height="52" forecolor="#000000"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="73" width="555" height="115"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="73" width="545" height="44"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Operaciones Críticas de su Proceso
+Favor de especificar el/los procesos/servicios o equipo(s) clave para la realización del servicio o producto, incluyendo sitios remotos (cuando aplique).]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="6" y="117" width="545" height="71" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="421" width="276" height="98"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="422" width="268" height="29"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Su organización realiza actividades en sitios temporales que estén considerando en la certificación?]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="6" y="451" width="270" height="66" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="421" width="279" height="98"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="423" width="268" height="28"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Enumere productos o servicios que no desee incluir en la certificación.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="283" y="451" width="268" height="66" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="516" width="276" height="98"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="517" width="268" height="29"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indique la (s) obligación (es) legal (es) con la (s) que cuenta actualmente.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="6" y="546" width="270" height="66" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="276" y="516" width="279" height="98"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="283" y="518" width="268" height="28"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Se realizan operaciones en locales del cliente?]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="283" y="546" width="268" height="66" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{field}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

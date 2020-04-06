@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form prependId="false">
+            <p:idleMonitor
+                timeout="#{session.maxInactiveInterval * 1000 - 125000}"
+                onidle="startPageTimer(#{session.maxInactiveInterval-120},30)"
+                onactive="timeoutDialog.hide()" />
+            <p:dialog header="La sesión esta por expirar!"
+                      widgetVar="timeoutDialog" 
+                      showEffect="fade" 
+                      hideEffect="fade" 
+                      modal="true"
+                      width="400"
+                      height="200"
+                      closable="false"
+                      draggable="false"
+                      resizable="false"
+                      onHide="resetPageTimer()"
+                      > 
+                <br/><br/>
+                <p>
+                    <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
+                    <div>La sesión terminara en <span id="dialog-countdown" style="font-weight:bold"></span> segundos.</div>
+                </p>
+                <br/><br/><br/>
+                <p>Deseas mantener activa tu sesión?</p> 
+                <p:commandButton value="Si..." oncomplete="resetPageTimer()" />
+            </p:dialog> 
+
+
+        </h:form>
+        <script type="text/javascript">
+            var startFrom = #{session.maxInactiveInterval-120}; 
+            var loopTill = 30;
+            var reduce = 1;
+            var handleDialog = null;
+            var redirectPage = "#{request.contextPath}/faces/index.xhtml";
+            var countDownDiv = "dialog-countdown";
+
+            function resetPageTimer() {
+                timeoutDialog.hide();
+                clearInterval(handleDialog);
+            }
+
+            function startDialogTimer(wCounter, timeOutPage) {
+                var e = null;
+                if (!e)
+                    e = document.getElementById(countDownDiv);
+                e.innerHTML = wCounter;
+                handleDialog = setInterval(function() {
+                    if (wCounter == 0) {
+                        clearInterval(handleDialog);
+                        window.location.href = timeOutPage;
+                    }
+                    else {
+                        wCounter -= reduce;
+                        e.innerHTML = wCounter;
+                    }
+                }, reduce * 1000);
+            }
+
+            function startPageTimer(wFrom, wReach) {
+                var handle = null;
+                handle = setInterval(function() {
+                    if (wFrom == wReach) {
+                        clearInterval(handle);
+                        timeoutDialog.show();
+                        startDialogTimer(loopTill, redirectPage);
+                    }
+                    else {
+                        wFrom -= reduce;
+                    }
+                }, reduce * 1000);
+            }
+        </script>
+    </ui:composition>
+</html>

@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>  
+        <h:outputStylesheet library="css" name="skins.css"/>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
+    </h:head>
+    <h:body>
+        <h:form id="datos" enctype="multipart/form-data">
+            <p:growl id="msgs" showDetail="true"/>
+            <p:toolbar id="tb">
+                <f:facet name="left">
+                    <p:commandButton value="Guardar" icon="ui-icon-disk" update="datos:infoCot"
+                                     action="#{pickListView.guardar}" onclick="PF('bloqueo').show();" 
+                                     oncomplete="PF('bloqueo').hide();"/>
+                </f:facet>
+            </p:toolbar>
+            <br/>
+            <p:panel id="pnlDatos" header="Nueva Cotización"> 
+                <p:panelGrid styleClass="perfilGrid">
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Tipo de cotización:" style="font-weight: bold"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:selectOneRadio id="tipoCot" value="#{pickListView.selectedTipoCot}" columns="2">
+                                <f:selectItems value="#{pickListView.optionsTipoCot}"/>
+                                <p:ajax event="change" update="datos:pnl"/>                    
+                            </p:selectOneRadio>
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="Mostrar información" icon="ui-icon-search"
+                                             actionListener="#{pickListView.refreshTabla}" update="datos:infoCot"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="4" style="alignment-adjust: middle">
+                            <p:panel id="pnl" widgetVar="pnl" styleClass="cotGrid" style="width: 100%">
+                                <p:panelGrid styleClass="perfilGrid" columns="2">
+                                    <p:outputLabel for="cicloCert" style="font-weight: bold" value="Ciclo de auditoria en que se encuentra la transferencia:" rendered="#{pickListView.selectedTipoCot==2}" />                        
+                                    <p:selectOneMenu id="cicloCert" value="#{pickListView.selectedCiclo}" rendered="#{pickListView.selectedTipoCot==2}">
+                                        <f:selectItem itemLabel="- Seleccionar -" itemValue="0" />
+                                        <f:selectItem itemLabel="1er Seguimiento" itemValue="1" />
+                                        <f:selectItem itemLabel="2do Seguimiento" itemValue="2" />
+                                        <f:selectItem rendered="#{pickListView.selectedPeriodo==1}" itemLabel="3er Seguimiento" itemValue="3" />
+                                        <f:selectItem rendered="#{pickListView.selectedPeriodo==1}" itemLabel="4to Seguimiento" itemValue="4" />
+                                        <f:selectItem rendered="#{pickListView.selectedPeriodo==1}" itemLabel="5to Seguimiento" itemValue="5" />
+                                    </p:selectOneMenu>
+                                </p:panelGrid>
+                            </p:panel>                            
+                        </p:column>                        
+                    </p:row>
+                    <p:row>
+                        <p:column style="text-align: center">
+                            <p:outputLabel value="Periodo:" style="font-weight: bold"/>                            
+                        </p:column>
+                        <p:column>
+                            <p:selectOneRadio id="periodo" value="#{pickListView.selectedPeriodo}" layout="grid" columns="2">
+                                <f:selectItems value="#{pickListView.optionsPeriodo}"/>
+                            </p:selectOneRadio>
+                        </p:column>
+                        <p:column style="text-align: center">
+                            <p:outputLabel value="¿Se incluyen Sitios Remotos en la cotización?" style="font-weight: bold"/>
+                        </p:column>
+                        <p:column>
+                            <p:selectBooleanCheckbox value="#{pickListView.selectedSR}" />
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:panel>
+            <br/>
+            <p:panel id="infoCot" header="Información de Costos">
+                <p:panelGrid id="pnlAct" style="margin-top:20px; width: 100%" binding="#{pickListView.tablaAct}">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="3">Costo del Registro</p:column>
+                        </p:row>
+                    </f:facet>
+                </p:panelGrid>
+                <br/>
+                <p:panelGrid id="pnlG" style="margin-top:20px; width: 100%" binding="#{pickListView.tablaMnto}">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="#{pickListView.estructura.totalCols}">
+                                Costo del Registro de Mantenimiento
+                            </p:column>
+                        </p:row>
+                    </f:facet>
+                </p:panelGrid>
+                <br/><br/>
+            </p:panel>
+            <br/><br/>
+            <p:sticky target="tb" />
+            <p:blockUI block="datos" widgetVar="bloqueo">
+                Procesando información, espere un momento por favor...<br/>
+                <br/> 
+                <p:graphicImage width="45" height="45" value="/Librerias/Imagenes/Base/loading.gif"/> 
+            </p:blockUI>
+            <br/><br/><br/><br/><br/><br/>
+            <p:inputNumber maxlength="0" style="width: 1px"/>
+            <!--p:panelGrid id="pnlGMuestra" style="margin-top:20px">
+                <f:facet name="header">
+                    <p:row>
+                        <p:column><p:spacer width="20" /></p:column>
+                        <p:column colspan="2">Primer año después del certificado</p:column>
+                        <p:column colspan="2">Segundo año después del certificado</p:column>
+                        <p:column colspan="2">Tercer año después del certificado</p:column>
+                    </p:row>
+                </f:facet>
+
+                <p:row>
+                    <p:column>Semestre</p:column>
+                    <p:column>1</p:column>
+                    <p:column>2</p:column>
+                    <p:column>3</p:column>
+                    <p:column>4</p:column>
+                    <p:column>5</p:column>
+                    <p:column rowspan="3">Re-Certificación</p:column>
+                </p:row>
+                <p:row>
+                    <p:column>Días</p:column>
+                    <p:column><p:inputNumber value="0"/></p:column>
+                    <p:column><p:inputNumber value="0"/></p:column>
+                    <p:column><p:inputNumber value="0"/></p:column>
+                    <p:column><p:inputNumber value="0"/></p:column>
+                    <p:column><p:inputNumber value="0"/></p:column>
+                </p:row>
+                <p:row>
+                    <p:column>Inversión</p:column>
+                    <p:column><p:inputText value="0"/></p:column>
+                    <p:column><p:inputText value="0"/></p:column>
+                    <p:column><p:inputText value="0"/></p:column>
+                    <p:column><p:inputText value="0"/></p:column>
+                    <p:column><p:inputText value="0"/></p:column>
+                </p:row>
+            </p:panelGrid-->
+
+            <!--p:pickList id="pickList" value="{pickListView.cities}" var="cities" itemLabel="{cities}" itemValue="{cities}" /> 
+            <p:commandButton id="citySubmit" value="Submit" update="displayCities" oncomplete="PF('cityDialog').show()" style="margin-top:5px" />
+
+            <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="cityDialog">
+                <h:panelGrid id="displayCities" columns="2">
+                    <h:outputText value="Source: " style="font-weight:bold" />
+                    <ui:repeat value="{pickListView.cities.source}" var="item">
+                        <h:outputText value="{item}" style="margin-right:5px" />
+                    </ui:repeat>
+
+                    <h:outputText value="Target: " style="font-weight:bold" />
+                    <ui:repeat value="{pickListView.cities.target}" var="item">
+                        <h:outputText value="{item}" style="margin-right:5px" />
+                    </ui:repeat>
+                </h:panelGrid>
+            </p:dialog-->
+        </h:form>
+    </h:body>
+</html>

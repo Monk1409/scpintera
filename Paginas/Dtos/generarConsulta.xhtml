@@ -1,0 +1,148 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">    
+    <h:head>  
+        <link href="#{facesContext.externalContext.requestContextPath}/Librerias/Estilos/skins.css" type="text/css" rel="stylesheet"/>
+        <script language="Javascript" type="text/javascript">      
+            var POJOS = 'datos:pojo';
+            var PAQUETE = 'datos:paquete';
+            var QUERY = 'datos:query';
+         
+            function validarConsulta() {
+                if((document.datos.elements[POJOS].value==='') || (document.datos.elements[PAQUETE].value==='') || (document.datos.elements[QUERY].value==='')) {
+                    alert('Verifique que los campos tengan informacion.');  
+                    return false;
+                } 
+                else {
+                    if(document.datos.elements[QUERY].value.indexOf("*")!== -1) {
+                        alert('La consulta no es valida, contiene *.');  
+                        return false;
+                    } 
+                    else {
+                        return true;
+                    } 
+                }
+            }
+        </script>
+    </h:head>
+    <h:body>   
+        <h:form id="datos">
+            <h:outputText escape="false" value="Generación de archivos Query" />            
+            <p:growl id="mensaje" showDetail="true" autoUpdate="true"/>
+            <p:growl id="_mensaje" for="mensaje2" showDetail="true" />
+            <p:spacer width="10" height="10" />
+            <table align="center" cellpadding="5" width="100%">
+                <tr>
+                    <td align="right" style=" width: 40%">            
+                        <p:outputLabel for="pojo" value="Nombre del Dto:" style=" font-weight: bold"/>
+                    </td>
+                    <td align="left">
+                        <p:inputText id="pojo" value="#{dtosGenerarConsulta.pojo}" style=" width: 50%"/> 
+                        <p:spacer width="30" height="1"/>
+                        <p:outputLabel value="Ejemplo: Vista_Detalle_Grupos" id="ejemplo" style=" color:rgb(0,0,214); font-style:italic;" />
+                    </td>
+                </tr>  
+                <tr>
+                    <td align="right" style=" width: 40%">            
+                        <p:outputLabel for="paquete" value="Paquete:" style=" font-weight: bold"/>
+                    </td>
+                    <td align="left">
+                        <p:inputText label="Label 1" id="paquete" value="#{dtosGenerarConsulta.paquete}" disabled="true" style=" width: 50%"/>
+                    </td>
+                </tr> 
+                <tr>
+                    <td align="right" style=" width: 40%">            
+                        <p:outputLabel for="query" value="Consulta:" style=" font-weight: bold"/>
+                    </td>
+                    <td align="left">
+                        <p:inputTextarea id="query" value="#{dtosGenerarConsulta.consulta}" rows="10" cols="100" style=" width: 50%"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <p:panel id="detalleLlave" rendered="true" style="border: none; width: 100%">
+                        <table align="center" cellpadding="5" width="100%">
+                            <tr>
+                                <td align="right" style=" width: 50%"> 
+                                    <p:outputLabel id="etiquetaLlave" rendered="false" for="camposLlave" value="Llave primaria: " style=" font-weight: bold"/>
+                                </td>
+                                <td align="left">
+                                    <p:selectOneMenu id="camposLlave" rendered="false" disabled="false" value="#{dtosGenerarConsulta.valorTablas}" label="Seleccione">
+                                        <f:selectItems value="#{dtosGenerarConsulta.optionsTablas}" />
+                                    </p:selectOneMenu>
+                                </td>
+                            </tr>
+                        </table>
+                        </p:panel>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <p:panel id="detalleConfiguracion" rendered="true" style="border: none; width: 100%">
+                            <table align="center" cellpadding="5" width="100%">
+                                <tr>
+                                    <td style=" width: 30%"> 
+                                        <p:outputLabel id="labelConfiguracion" rendered="false" for="configuracion" value="Copia esta linea a hibernate.cfg.xml: " style=" font-weight: bold"/>
+                                    </td>
+                                    <td align="left">
+                                        <p:inputText rendered="false" label="Label 2" id="configuracion" style=" width: 100%"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" width: 30%"> 
+                                        <p:outputLabel id="labelSentencia" rendered="false" for="sentencia" value="Copia estas lineas a codEnoe.xml" style=" font-weight: bold"/>
+                                    </td>
+                                    <td align="left">
+                                        <p:inputTextarea rendered="false" label="Label 1" id="sentencia" style=" width: 100%"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style=" width: 30%"> 
+                                        <p:outputLabel id="textoLabel" rendered="false" for="msgDto" value="Copie esta linea dentro del tag &lt;JavaBean/> del DataControl (xml) perteneciente al dto de esta  vista, para modificar los headers de las tablas:" style=" font-weight: bold"/>
+                                    </td>
+                                    <td align="left">
+                                        <p:inputTextarea label="Label 1" id="msgDto" style=" width: 100%" cols="100" rendered="false"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:panel>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <p:separator/> 
+                        <p:spacer width="10" height="10" />
+                        <p:commandButton id="validarConsulta"
+                                         value="Validar Consulta" 
+                                         onstart="return validarConsulta();"
+                                         action="#{dtosGenerarConsulta.validarConsulta}" update="detalleLlave borrarConsulta mensaje"/>
+                        <p:spacer width="10" height="10" />
+                        <p:commandButton id="borrarConsulta"
+                                         value="Borrar Consulta"                                          
+                                         action="#{dtosGenerarConsulta.borrarConsulta}" 
+                                         rendered="true" 
+                                         disabled="true" ajax="false" />
+                        <p:spacer width="10" height="10" />
+                        <p:commandButton id="generar"
+                                         value="Generar" 
+                                         onclick="return validarConsulta()" 
+                                         action="#{dtosGenerarConsulta.generar}" update="detalleConfiguracion"
+                                         disabled="false" rendered="true" ajax="true"/>
+                        <p:spacer width="10" height="10" />
+                        <p:commandButton id="regresar" value="Regresar" 
+                                         disabled="false" 
+                                         rendered="false"
+                                         action="#{dtosGenerarConsulta.regresar}" ajax="false" />
+                    </td>
+                </tr>
+            </table>
+            <p:blockUI block="datos" trigger="datos:generar">
+                Cargando información, espere un momento por favor...<br/>
+                <br/> 
+                <p:graphicImage width="45" height="45" value="/Librerias/Imagenes/Base/loading.gif"/> 
+            </p:blockUI>
+        </h:form>        
+    </h:body>
+</html>

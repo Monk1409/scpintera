@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ID_PERFIL_DATOS_GENERALES" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT
+     CODIGO, ID_CODIGO_REVISION, REVISION, FECHA_REVISION, TIEMPO_RETENCION, CONTACTO_1, CARGO_1
+FROM
+     tc_codigo_revision, tr_perfil_datos_generales
+WHERE 
+     id_perfil_datos_generales = $P{ID_PERFIL_DATOS_GENERALES}]]>
+	</queryString>
+	<field name="CODIGO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_CODIGO_REVISION" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="REVISION" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FECHA_REVISION" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TIEMPO_RETENCION" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CONTACTO_1" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CARGO_1" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<rectangle>
+				<reportElement x="243" y="3" width="93" height="91"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="335" y="3" width="109" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="335" y="23" width="109" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="335" y="43" width="109" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="335" y="63" width="109" height="31"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="444" y="3" width="96" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="444" y="63" width="96" height="31"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="444" y="43" width="96" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="444" y="23" width="96" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="340" y="6" width="90" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="25" width="90" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[REVISIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="45" width="90" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA DE REVISIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="66" width="90" height="28"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[TIEMPO DE RETENCIÓN:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="248" y="5" width="85" height="88"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\monica.lopezcal\\Documents\\NetBeansProjects\\agenda\\web\\Librerias\\Imagenes\\Logos\\interaPdf.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="446" y="5" width="90" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CODIGO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="25" width="90" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{REVISION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="45" width="90" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new SimpleDateFormat("dd/MM/yy").format($F{FECHA_REVISION})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="446" y="71" width="90" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TIEMPO_RETENCION}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="20" backcolor="#66CC00"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PERFIL DE LA ORGANIZACIÓN]]></text>
+			</staticText>
+		</band>
+		<band height="27"/>
+		<band height="21"/>
+		<band height="28"/>
+		<band height="139">
+			<staticText>
+				<reportElement x="0" y="9" width="555" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Si desea agregar algún comentario u observación acerca de su organización, hágalo en el espacio a continuación.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="25" width="555" height="55"/>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="3" y="27" width="551" height="52"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$F{ID_CODIGO_REVISION}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="93" width="185" height="45" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="3" y="93" width="182" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre y Firma]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="185" y="93" width="185" height="45" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="188" y="93" width="182" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="3" y="111" width="182" height="26" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CONTACTO_1}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="370" y="93" width="185" height="45" backcolor="#FFFFFF"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="373" y="94" width="182" height="16"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="373" y="112" width="180" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="187" y="111" width="182" height="26" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CARGO_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

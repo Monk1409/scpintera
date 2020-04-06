@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>  
+        <h:outputStylesheet library="css" name="skins.css"/>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
+    </h:head>
+    <h:body>
+        <h:form id="datos" enctype="multipart/form-data">
+            <p:growl id="msgs" showDetail="true"/>
+            <p:toolbar id="tb">
+                <f:facet name="left">
+                    <p:commandButton value="Guardar" icon="ui-icon-disk" update="datos:infoCot" ajax="true"
+                                     action="#{modificaCot.guardar}" onclick="PF('bloqueo').show();" 
+                                     oncomplete="PF('bloqueo').hide();"/>
+                </f:facet>
+            </p:toolbar>
+            <br/>
+            <p:panel id="pnlDatos" header="Modificar Cotización"> 
+                <p:panelGrid styleClass="perfilGrid">
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Tipo de cotización:" style="font-weight: bold"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{modificaCot.cotizacion.idTipoCotizacion==1?'Certificación Inicial':
+                                                    modificaCot.cotizacion.idTipoCotizacion==2?'Transferencia':
+                                                    modificaCot.cotizacion.idTipoCotizacion==3?'Re-certificación':'Visita Especial'}" />
+                        </p:column>   
+                        <p:column style="text-align: center">
+                            <p:outputLabel value="Periodo:" style="font-weight: bold"/>                            
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{modificaCot.cotizacion.idEsquemaCertificacion==1?'Semestral':'Anual'}" />
+                        </p:column>                     
+                    </p:row>
+                    <p:row rendered="#{(modificaCot.cotizacion.idCotizacion==2)}">
+                        <p:column colspan="2" style="alignment-adjust: middle">
+                             <p:outputLabel for="cicloCert" style="font-weight: bold" value="Ciclo de auditoria en que se encuentra la transferencia:"/>                        
+                        </p:column> 
+                        <p:column colspan="2">
+                            <p:outputLabel value="#{modificaCot.ciclo}" />
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="2">
+                            <p:outputLabel value="¿Se incluyen Sitios Remotos en la cotización?" style="font-weight: bold"/>
+                        </p:column>
+                        <p:column colspan="2">
+                            <p:selectBooleanCheckbox value="#{modificaCot.sitioR}" disabled="true"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:panel>
+            <br/>
+            <p:panel id="infoCot" header="Información de Costos">
+                <p:panelGrid id="pnlAct" style="margin-top:20px; width: 100%" binding="#{modificaCot.tablaAct}">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="3">Costo del Registro</p:column>
+                        </p:row>
+                    </f:facet>
+                </p:panelGrid>
+                <br/>
+                <p:panelGrid id="pnlG" style="margin-top:20px; width: 100%" binding="#{modificaCot.tablaMnto}">
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="#{modificaCot.estructura.totalCols}">
+                                Costo del Registro de Mantenimiento
+                            </p:column>
+                        </p:row>
+                    </f:facet>
+                </p:panelGrid>
+                <br/><br/>
+            </p:panel>
+            <br/><br/>
+            <p:sticky target="tb" />
+            <p:blockUI block="datos" widgetVar="bloqueo">
+                Procesando información, espere un momento por favor...<br/>
+                <br/> 
+                <p:graphicImage width="45" height="45" value="/Librerias/Imagenes/Base/loading.gif"/> 
+            </p:blockUI>
+            <p:inputNumber maxlength="0" style="width: 1px"/>
+        </h:form>
+    </h:body>
+</html>
