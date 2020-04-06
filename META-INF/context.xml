@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/agenda" docBase="agenda" crossContext="true" reloadable="true" debug="1">
+<Resource name="jdbc/agendaDS" auth="Container" type="javax.sql.DataSource"
+          driverClassName="com.mysql.jdbc.Driver" 
+          url="jdbc:mysql://localhost/agenda"
+          username="intera" password="adminIntera"
+          maxActive="20" maxIdle="10" maxWait="-1" />
+</Context>

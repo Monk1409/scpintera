@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">      
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+    <h:head>  
+        <title>SCP Intera</title>  
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
+        <h:outputStylesheet library="css" name="skins.css"/>
+        <h:outputScript library="js" name="utilerias.js"/>
+        <script type="text/javascript">
+            window.onload = function() {
+                fecha();
+            };
+        </script>
+    </h:head>
+    <h:body>
+        <p:idleMonitor timeout="#{session.maxInactiveInterval * 1000 - 125000}"
+                       onidle="startPageTimer()" />
+        <h:form id="datos">  
+            <p:blockUI block="datos" trigger="aceptar">
+                Validando acceso, espere por favor.<br/><br/>
+                <p:graphicImage value="../Librerias/Imagenes/ajax-loading-bar.gif"/>
+            </p:blockUI>                
+            <p:growl id="mensajes" showDetail="true" life="2000"/>            
+            <div id="cabecera" class="ui-state-default" style="position: fixed">                
+                <h3><span id="reloj" class="reloj"></span></h3>
+                <h2><span style="padding-left: 2%">Sistema de Control de Procesos SCP</span></h2>
+            </div>
+            <div id="divLogo">
+                <img src="../Librerias/Imagenes/Logos/intera-01.png"/>
+            </div>            
+            <p:panel id="pnlLogin" header="Inicio de sesión" styleClass="cajaLogin">
+                <div id="divLogin">                    
+                    <h3 class="ui-state-default"><h:outputText styleClass="fa fa-user"/><p:spacer width="5"/><h:outputLabel value="Cuenta:" style="font-weight:bold"/></h3>
+                    <p:inputText id="cuenta" styleClass="inputTxt" value="#{accesoLogin.cuenta}" required="true" requiredMessage="La cuenta no puede ir vac&iacute;a"/>
+                    <p:watermark for="cuenta" value="clave.usuario" />
+                    <br/><br/>
+                    <h3 class="ui-state-default"><h:outputText styleClass="fa fa-key"/><h:outputLabel value="Contrase&#241;a:" style="font-weight:bold"/></h3>
+                    <p:inputText id="contrasenia" styleClass="inputTxt" value="#{accesoLogin.contrasenia}"  type="password" required="true" requiredMessage="La contraseña no puede ir vac&iacute;a" /> 
+                    <p:watermark for="contrasenia" value="Contraseña" />
+                    <br/><br/>
+                    <p:commandButton styleClass="btn" value="Ingresar" id="aceptar" ajax="false" actionListener="#{accesoLogin.aceptar}" update="datos:mensajes"/>
+                </div> 
+            </p:panel>
+        </h:form> 
+    </h:body>
+</html>
